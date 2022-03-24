@@ -1,6 +1,8 @@
 package main
 
-import "time"
+import (
+	"time"
+)
 
 type Item struct {
 	Title    string
@@ -12,15 +14,21 @@ type Todos struct {
 }
 
 func (todos *Todos) Add(item Item) {
-	// TODO: answer here
+	todos.items = append(todos.items, item)
 }
 
 func (todos *Todos) GetAll() []Item {
-	return []Item{} // TODO: replace this
+	return todos.items // TODO: replace this
 }
 
 func (todos *Todos) GetUpcoming() []Item {
-	return []Item{} // TODO: replace this
+	var itemUpComing []Item
+	for _, v := range todos.items {
+		if time.Now().Add(+time.Hour) == v.Deadline {
+			itemUpComing = append(itemUpComing, v)
+		}
+	}
+	return itemUpComing
 }
 
 func NewItem(title string, deadline time.Time) Item {
