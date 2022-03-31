@@ -13,6 +13,7 @@ import "fmt"
 
 // TODO: answer here
 
+
 func TotalEmployeeBonus(employees []Employee) int {
 	// Hitunglah total bonus yang dikeluarkan dari list of Employee
 	// TODO: answer here

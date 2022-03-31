@@ -15,7 +15,8 @@ func NewItem(id int, name string, price float64) Item {
 }
 
 func (i *Inventory) Add(item Item) {
-	// TODO: answer here
+	// todo : answer here
+	
 }
 
 func (i Inventory) Items() []Item {
