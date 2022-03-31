@@ -13,12 +13,6 @@ func main() {
 	data = 100
 	fmt.Println(data)
 
-	data := 
-	data = "Restaurant"
-	fmt.Println(data)
-
-	data = true
-	fmt.Println(data)
 
 	for _, m := range menu {
 		for k, v := range m {
