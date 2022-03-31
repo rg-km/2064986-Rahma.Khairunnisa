@@ -10,8 +10,8 @@ func main() {
 
 	// Buatlah beberapa menu yang memiliki atribut nama, jenis (nasi, cepat saji, minuman, dll), dan harga. Tambahkan setiap menu pada list `menu`
 	// TODO: answer here
-	data = 100
-	fmt.Println(data)
+	menu = append(menu, map[string]interface{} {"Nama":"Ikan Bakar","Jenis":"Olahan","Harga":40000})
+	menu = append(menu, map[string]interface{} {"Nama":"Rujak Buah","Jenis":"Camilan","Harga":5000})
 
 
 	for _, m := range menu {

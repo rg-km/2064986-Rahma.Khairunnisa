@@ -9,42 +9,50 @@ import "fmt"
 // Untuk menghitung bonus terdapat tiga aturan sebagai berikut:
 // Bonus untuk Manager adalah 3 * BaseSalary
 // Bonus untuk SeniorEngineer adalah 2 * BaseSalary
-// Bonus untuk JuniorEngineer adalah 3 * BaseSalary
+// Bonus untuk JuniorEngineer adalah 1 * BaseSalary
 
 // TODO: answer here
-type employee interface {
-	GetName() string
-	setName(string)
-	getbonus() string
-	setbonus(string)
+type Employee interface {
+	GetBonus () int
+}
+type Manager struct {
+	BaseSalary int
+}
+func (m Manager) GetBonus() int {
+	return 3 * m.BaseSalary
 }
 
-type employee struct {
-	Name string
-	bonus string
+type SeniorEngineer struct {
+	BaseSalary int
+}
+func (s SeniorEngineer) GetBonus() int {
+	return 2 * s.BaseSalary
 }
 
-func (e *employee) GetName() string {
-	return "Manager: " + Bonus
+type JuniorEngineer struct {
+	BaseSalary int
+}
+func (j JuniorEngineer) GetBonus() int {
+	return 1 * j.BaseSalary
 }
 
-func (m *employee) GetName() string {
-	return "SeniorEngineer: " + Bonus
-}
-
-func (m *employee) GetName() string {
-	return "JuniorEngineer: " + Bonus
-}
-
-func Employee (employees []Employee) int {
+func TotalEmployeeBonus(employees []Employee) int {
 	// Hitunglah total bonus yang dikeluarkan dari list of Employee
 	// TODO: answer here
-	
+	var total int
+	for _, employee := range employees {
+		total += employee.GetBonus()
 	}
+	return total
+	
 }
 
 func main() {
 	// Buatlah objek konkret untuk masing-masing objek dan panggil function TotalEmployeeBonus. Print total bonus untuk semua employee.
 	// TODO: answer here
-	
+	var employees []Employee
+	employees = append(employees, Manager{BaseSalary: 20_000_000})
+	employees = append(employees, SeniorEngineer{BaseSalary: 15_000_000})
+	employees = append(employees, JuniorEngineer{BaseSalary: 10_000_000})
+	fmt.Println(TotalEmployeeBonus(employees))
 }
