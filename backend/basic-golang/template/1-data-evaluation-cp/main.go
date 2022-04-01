@@ -22,4 +22,8 @@ type Account struct {
 func ExecuteToByteBuffer(account Account) ([]byte, error) {
 	var textTemplate string
 	// TODO: answer here
+	for _, Execute := range Execute {
+		textTemplate += Execute.ByteBuffer()
+	}
+	return.total
 }
