@@ -12,8 +12,17 @@ func GetMenu() []map[string]interface{} {
 	var menu []map[string]interface{}
 
 	// TODO: answer here
-	menu = append(menu, map[string]interface{}{"Nama": "Ayam Goreng", "Jenis": "Cepat Saji", "Harga": 20000})
-	menu = append(menu, map[string]interface{}{"Nama": "Cola", "Jenis": "Minuman", "Harga": 7000})
+	ayam := make(map[string]interface{})
+	ayam["Nama"]="Ayam Goreng"
+	ayam["Jenis"]="Cepat saji"
+	ayam["Harga"]=20000
+
+	cola := make(map[string]interface{})
+	cola["Nama"]="Cola"
+	cola["Jenis"]="Minuman"
+	cola["Harga"]=7000
+
+	menu = append(menu,ayam,cola)
 
 	return menu
 }
