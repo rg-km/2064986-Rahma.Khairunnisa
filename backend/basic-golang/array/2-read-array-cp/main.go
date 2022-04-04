@@ -7,4 +7,7 @@ import "fmt"
 // Outputkan hasilnya ya
 func main() {
 	// TODO: answer here
+	array := [5]string{"R", "A", "H", "M", "A"}
+	fmt.Println(array[0]) //output: R
+	fmt.Println(array[4]) //output: A
 }

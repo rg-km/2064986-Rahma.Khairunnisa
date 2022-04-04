@@ -14,7 +14,12 @@ import "encoding/json"
 
 type UserRank struct {
 	// TODO: answer here
+	Name string 'json:"name"'
+	Email string
+	'json:"address,omitempty"'
+	Rank int 'json:"rank"'
 }
+
 
 type Leaderboard struct {
 	Users []*UserRank
@@ -22,4 +27,8 @@ type Leaderboard struct {
 
 func EncodeToJson(leaderboard Leaderboard) ([]byte, error) {
 	// TODO: answer here
+	
+	l, e:=json.Marshal(leaderboard)
+
+	return l, e
 }
