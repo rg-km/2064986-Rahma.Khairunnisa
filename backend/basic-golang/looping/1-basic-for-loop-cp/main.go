@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func main() {
 	// tambahkan setiap data pada slice dibawah ini
 	data := []int{1, 20, 30, 55, 159, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000}
@@ -10,5 +12,7 @@ func main() {
 	result := 0
 	for i := 0; i <= len(data); i++ {
 		// TODO: answer here
+
+		fmt.Println(len(data))
 	}
 }

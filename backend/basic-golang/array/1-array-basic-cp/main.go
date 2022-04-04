@@ -7,11 +7,11 @@ import "fmt"
 // gunakan inisialisasi menggunakan `:=` pada array1.
 func main() {
 	// TODO: answer here
-	var array1 [5]string
-	fmt.Println(array1)
+	var array [5]string
+	fmt.Println(array)
 
-	var array2 := [5]string{"R", "A", "H", "M", "A"}
-	fmt.Println(array2)
+	var array1 ':=' [5]string{"R", "A", "H", "M", "A"}
+	fmt.Println(array1)
 	
 
 	
