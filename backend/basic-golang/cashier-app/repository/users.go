@@ -2,7 +2,6 @@ package repository
 
 import (
 	"errors"
-
 	"github.com/ruang-guru/playground/backend/basic-golang/cashier-app/db"
 )
 
@@ -15,13 +14,11 @@ func NewUserRepository(db db.DB) UserRepository {
 }
 
 func (u *UserRepository) LoadOrCreate() ([]User, error) {
-	// TODO: replace this
 	data, err := u.db.Load("users")
 	if err != nil {
-		var record = [][]string{{
+		var record = [][]string {{
 			"username", "password", "loggedin",
 		}}
-
 		if err := u.db.Save("users", record); err != nil {
 			return nil, err
 		}
@@ -34,7 +31,6 @@ func (u *UserRepository) LoadOrCreate() ([]User, error) {
 			Username: dat[0],
 			Password: dat[1],
 		}
-
 		if dat[2] == "true" {
 			user.Loggedin = true
 		} else {
@@ -43,17 +39,14 @@ func (u *UserRepository) LoadOrCreate() ([]User, error) {
 
 		users = append(users, user)
 	}
-
-	return users, nil
+	return users, nil // TODO: replace this
 }
 
 func (u *UserRepository) SelectAll() ([]User, error) {
-	// TODO: replace this
-	return u.LoadOrCreate()
+	return u.LoadOrCreate() // TODO: replace this
 }
 
 func (u UserRepository) Login(username string, password string) (*string, error) {
-	// TODO: replace this
 	users, err := u.SelectAll()
 	if err != nil {
 		return nil, err
@@ -70,7 +63,6 @@ func (u UserRepository) Login(username string, password string) (*string, error)
 }
 
 func (u *UserRepository) FindLoggedinUser() (*string, error) {
-	// TODO: replace this
 	users, err := u.SelectAll()
 	if err != nil {
 		return nil, err
@@ -82,10 +74,18 @@ func (u *UserRepository) FindLoggedinUser() (*string, error) {
 		}
 	}
 
-	return nil, errors.New("user not login")
+	return nil, errors.New("no user is logged in")
+	
 }
 
 func (u *UserRepository) Logout(username string) error {
+	user,err := u.FindLoggedinUser()
+	if err != nil {
+		return err
+	}
+	u.changeStatus(*user, false)
+	
+	
 	return nil // TODO: replace this
 }
 
@@ -127,5 +127,14 @@ func (u *UserRepository) changeStatus(username string, status bool) error {
 }
 
 func (u *UserRepository) LogoutAll() error {
+	user, err := u.SelectAll()
+	if err != nil {
+		return err
+	}
+
+	for _, user := range user{
+		u.Logout(user.Username)
+	}
+
 	return nil // TODO: replace this
 }

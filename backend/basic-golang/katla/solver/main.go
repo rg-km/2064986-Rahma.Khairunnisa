@@ -93,5 +93,63 @@ func calculateHints(guess, answer string) (hints []hint) {
 func main() {
 	dictionary := getDictionaryWords()
 
+	rand.Seed(time.Now().UnixNano())
+	answer := dictionary[rand.Intn(len(dictionary))]
+
 	// TODO: answer here
+	isWin := false
+	for trial := 0; trial < maxGuess; trial++ {
+		var guess string
+		fmt.Printf("Guess %d: \n", trial+1)
+		for {
+			guess = ""
+			fmt.Scanln(&guess)
+
+			if len(guess) != wordLength {
+				fmt.Printf("Please enter exactly %d characters\n", len(answer))
+				continue
+			}
+
+			isAllLowerCase := true
+			for _, c := range guess {
+				if !(c >= 'a' && c <= 'z') {
+					isAllLowerCase = false
+				}
+			}
+			if !isAllLowerCase {
+				fmt.Println("Please enter lowercase characters only")
+				continue
+			}
+
+			if !isInDictionary(guess, dictionary) {
+				fmt.Printf("%s is not in the dictionary\n", guess)
+				continue
+			}
+
+			break
+		}
+
+		hints := calculateHints(guess, answer)
+		for i := 0; i < wordLength; i++ {
+			if hints[i] == notFound {
+				fmt.Printf("X")
+			} else if hints[i] == correctPosition {
+				fmt.Printf("G")
+			} else if hints[i] == correctLetter {
+				fmt.Printf("Y")
+			}
+		}
+		fmt.Println()
+		fmt.Println()
+
+		if guess == answer {
+			fmt.Println("You win!")
+			isWin = true
+			break
+		}
+	}
+
+	if !isWin {
+		fmt.Printf("The correct answer is: %s\n", answer)
+	}
 }

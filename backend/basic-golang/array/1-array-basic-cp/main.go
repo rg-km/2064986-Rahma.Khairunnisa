@@ -8,10 +8,10 @@ import "fmt"
 func main() {
 	// TODO: answer here
 	var array1 [5]string
-	fmt.Println(array1)
+	array2 := [5]string["R", "A", "H", "M", "A"]
 
-	var array1 := [5]string{R, A, H, M, A}
 	fmt.Println(array1)
+	fmt.Println(array2)
 	
 
 	

@@ -43,8 +43,38 @@ func main() {
 		"sosis":  20000,
 		"soto":   25000,
 	}
-
+	var pilihan, addAgain string
 	orderMenu := make(map[string]int64)
 
 	// TODO: answer here
+	
+	for {
+		fmt.Println("Menu Makanan : ")
+		for k, v := range foodMenu {
+			fmt.Printf("Menu : %s, Price : %s \n ", k, v)
+		}
+
+		fmt.Print("Masukkan Nama Menu Makanan yang Ingin Dipesan : ")
+		fmt.Scan(&pilihan)
+
+		orderMenu[pilihan] = foodMenu[pilihan]
+
+		fmt.Println()
+		fmt.Println("Data Ordered Menu Updated : ")
+		fmt.Printf("Menu : %s, Price : %d \n", pilihan, foodMenu[pilihan])
+
+		fmt.Printf("Ingin menambah data baru?(yes/no): ")
+		fmt.Scan(&addAgain)
+
+		if addAgain == "no" {
+			break
+		}
+	}
+	var total int64
+	fmt.Println("Data Ordered Menu Updated!:")
+	for k, v := range orderMenu {
+		fmt.Println("- Menu : ", k, ", ", "Price :", v)
+		total = total + v
+	}
+	fmt.Printf("Total harga makanan yang harus anda bayar :  %d", total)
 }

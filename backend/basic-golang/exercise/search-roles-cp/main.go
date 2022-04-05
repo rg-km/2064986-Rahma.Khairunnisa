@@ -32,7 +32,7 @@ type User struct {
 
 func main() {
 
-	users := []User{
+	user := []User{
 		{
 			name: "Aditira",
 			age:  20,
@@ -61,4 +61,24 @@ func main() {
 	}
 
 	// TODO: answer here
+	var rol string
+	fmt.Println("Role:\n-Programmer\n-DevOps\n-Designer")
+	fmt.Printf("Masukkan Role: ")
+	fmt.Scan(&rol)
+	a := true
+	for i := 0; i < len(user); i++ {
+		if rol == user[i].role {
+			fmt.Printf("%+v\n", user[i])
+			a = false
+		}
+	}
+	if a == true {
+		for i := 0; i < len(user); i++ {
+			if rol == user[i].role {
+			} else {
+				fmt.Print("Role: ", rol, " Not Found!")
+				break
+			}
+		}
+	}
 }

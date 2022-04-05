@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 // Check Point:
@@ -36,4 +35,48 @@ import (
 
 func main() {
 	// TODO: answer here
+	var panjang float32
+	var lebar float32
+	var tinggi float32
+	var jari float32
+	const phi = 3.14
+
+	var choice int = 0
+	var result float32 = 0
+	fmt.Println("1: Rectangle Area")
+	fmt.Println("2: Rectangle Area")
+	fmt.Println("3: Triangle Area")
+	fmt.Println("4: Circle Area")
+	fmt.Print("Enter Choice: ")
+	fmt.Scan(&choice)
+
+	switch choice {
+	case 1:
+		fmt.Printf("Masukkan sisi: ")
+		fmt.Scan(&panjang)
+		result = panjang * panjang
+		fmt.Printf("Result: %d", result)
+		// fmt.Printf("Result: %d", result)
+	case 2:
+		fmt.Printf("Masukkan Panjang: ")
+		fmt.Scan(&panjang)
+		fmt.Printf("Masukkan Lebar: ")
+		fmt.Scan(&lebar)
+		result = panjang * lebar
+		fmt.Println("Result: ", result)
+	case 3:
+		fmt.Printf("Masukkan Panjang: ")
+		fmt.Scan(&panjang)
+		fmt.Printf("Masukkan Tinggi: ")
+		fmt.Scan(&tinggi)
+		result = (panjang * tinggi) / 2
+		fmt.Println("Result:", result)
+	case 4:
+		fmt.Printf("Masukkan Jari-jari")
+		fmt.Scan(&jari)
+		result = phi * jari * jari
+		fmt.Println("Result:", result)
+	default:
+		fmt.Println("Invalid choice")
+	}
 }
