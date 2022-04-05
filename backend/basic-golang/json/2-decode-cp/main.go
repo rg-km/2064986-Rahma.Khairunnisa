@@ -13,6 +13,9 @@ import "encoding/json"
 
 type UserRank struct {
 	// TODO: answer here
+	Name  string `json:"name"`
+	Email string `json:"address,omitempty"`
+	Rank  int    `json:"rank"`
 }
 
 type Leaderboard struct {
@@ -21,4 +24,12 @@ type Leaderboard struct {
 
 func DecodeToLeaderboard(jsonData []byte) (Leaderboard, error) {
 	// TODO: answer here
+	u := Leaderboard{}
+
+	er := json.Unmarshal(jsonData, &u)
+	if er != nil {
+		return u, er
+
+	}
+	return u, nil
 }
