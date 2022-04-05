@@ -2,12 +2,11 @@ package repository
 
 import (
 	"strconv"
-
 	"github.com/ruang-guru/playground/backend/basic-golang/cashier-app/db"
 )
 
 type CartItemRepository struct {
-	db db.DB
+	db db.DB 
 }
 
 func NewCartItemRepository(db db.DB) CartItemRepository {
@@ -65,7 +64,7 @@ func (u *CartItemRepository) Save(cartItems []CartItem) error {
 }
 
 func (u *CartItemRepository) SelectAll() ([]CartItem, error) {
-	// TODO: replace this
+	//return []CartItem{}, nil
 	return u.LoadOrCreate()
 }
 
@@ -95,7 +94,6 @@ func (u *CartItemRepository) Add(product Product) error {
 	}
 
 	return u.Save(carts)
-	
 }
 
 func (u *CartItemRepository) ResetCartItems() error {
@@ -103,7 +101,7 @@ func (u *CartItemRepository) ResetCartItems() error {
 }
 
 func (u *CartItemRepository) TotalPrice() (int, error) {
-	// TODO: replace this
+
 	carts, err := u.LoadOrCreate()
 	if err != nil {
 		return 0, err
@@ -116,5 +114,4 @@ func (u *CartItemRepository) TotalPrice() (int, error) {
 	}
 
 	return totalPrice, nil
-
 }
