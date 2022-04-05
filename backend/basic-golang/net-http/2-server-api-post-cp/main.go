@@ -61,9 +61,9 @@ func TablesHandler(w http.ResponseWriter, r *http.Request) {
 			panic(err)
 		}
 
-		var newData []Table 
-		
-		err = json.Unmarshall(body, &newData)
+		var newData []Table
+
+		err = json.Unmarshal(body, &newData) 
 		if err != nil {
 			panic(err)
 		}
@@ -71,6 +71,7 @@ func TablesHandler(w http.ResponseWriter, r *http.Request) {
 		for _, table := range newData {
 			data = append(data, table)
 		}
+
 		// set header response code with status created/201
 		w.WriteHeader(http.StatusCreated)
 		// write json reponse body

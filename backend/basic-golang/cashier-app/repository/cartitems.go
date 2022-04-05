@@ -74,11 +74,11 @@ func (u *CartItemRepository) Add(product Product) error {
 		return err
 	}
 
-	return nil // TODO: replace this
+	return CartItems // TODO: replace this
 }
 
 func (u *CartItemRepository) ResetCartItems() error {
-	return nil // TODO: replace this
+	return CartItemRepository // TODO: replace this
 }
 
 func (u *CartItemRepository) TotalPrice() (int, error) {

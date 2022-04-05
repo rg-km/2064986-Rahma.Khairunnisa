@@ -19,14 +19,34 @@ type Table struct {
 	Total int    `json:"total"`
 }
 
+func tables(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	if r.Method == "GET" {
+
+		result, err := json.MarshalIndent(data, "", "\t")
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		w.Write(result)
+		return
+	}
+
+
+	http.Error(w, "", http.StatusBadRequest)
+}
+
 func TableHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	if r.Method == "GET" {
 
 		// TODO: answer here
+		
 		if r.FormValue("total") != "" {
-			total, err := strconv.Ato1(r.FormValue("total"))
+			total, err := strconv.Atoi(r.FormValue("total"))
 			if err != nil {
 				panic(err)
 			}
@@ -34,21 +54,23 @@ func TableHandler(w http.ResponseWriter, r *http.Request) {
 
 			for _, table := range data {
 				if table.Total == total {
-					newData = append(newData, table)
+					newData = append(newData, table )
 				}
 			}
+			
 			if len(newData) == 0 {
-				http.Error(w, '{"status":"table not found"}', http.StatusNotFound)
+				http.Error(w, `{"status":"table not found"}`, http.StatusNotFound)
 				return
 			}
 
 			result, err := json.Marshal(newData)
 
-			w.write(result)
+			w.Write(result)
 			return
 		}
 		http.Error(w, "invalid total", http.StatusBadRequest)
 		return
+
 	}
 
 	http.Error(w, "", http.StatusBadRequest)

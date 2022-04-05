@@ -6,4 +6,5 @@ import "fmt"
 // Output satu semua key dan value yang ada di map tersebut
 func main() {
 	// TODO: answer here
+	
 }
