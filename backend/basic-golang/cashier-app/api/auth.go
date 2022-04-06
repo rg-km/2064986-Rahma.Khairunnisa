@@ -29,15 +29,17 @@ func (api *API) login(w http.ResponseWriter, req *http.Request) {
 
 	fmt.Println(res)
 
-	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: ""}) // TODO: replace this
+	json.NewEncoder(w).Encode(LoginSuccessResponse{Username : *res})  // TODO: replace this
 }
 
 func (api *API) logout(w http.ResponseWriter, req *http.Request) {
 	username := req.URL.Query().Get("username")
 	err := api.usersRepo.Logout(username)
+	encoder := json.NewEncoder(w)
 	if err != nil {
+
 		w.WriteHeader(http.StatusUnauthorized)
-		encoder := json.NewEncoder(w)
+		
 		encoder.Encode(AuthErrorResponse{Error: err.Error()})
 		return
 	}

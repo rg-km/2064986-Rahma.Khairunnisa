@@ -7,10 +7,8 @@ import "fmt"
 // gunakan inisialisasi menggunakan `:=` pada array1.
 func main() {
 	// TODO: answer here
-	var array1 [5]string
-	array2 := [5]string["R", "A", "H", "M", "A"]
+	array2 := [5]string{"R", "A", "H", "M", "A"}
 
-	fmt.Println(array1)
 	fmt.Println(array2)
 	
 
