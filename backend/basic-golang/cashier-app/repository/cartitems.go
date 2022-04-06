@@ -99,19 +99,6 @@ func (u *CartItemRepository) Add(product Product) error {
 
 	return u.Save(carts)
 
-	// record := [][]string{
-	// 	{"category", "product_name", "price", "quantity"},
-	// }
-	// for i := 0; i < len(record); i++ {
-	// 	record = append(record, []string{
-	// 		product.Category,
-	// 		product.ProductName,
-	// 		strconv.Itoa(product.Price),
-	// 		"1",
-	// 	})
-	// }
-	//return u.Save(carts)
-	// TODO: replace this
 }
 
 func (u *CartItemRepository) ResetCartItems() error {
@@ -119,12 +106,12 @@ func (u *CartItemRepository) ResetCartItems() error {
 		{"category", "product_name", "price", "quantity"},
 	}
 	return u.db.Save("cart_items", resetData)
-	//return nil // TODO: replace this
+	// TODO: replace this
 
 }
 
 func (u *CartItemRepository) TotalPrice() (int, error) {
-	//return 0, nil // TODO: replace this
+	// TODO: replace this
 	cartItems, err := u.SelectAll()
 	if err != nil {
 		return 0, err
