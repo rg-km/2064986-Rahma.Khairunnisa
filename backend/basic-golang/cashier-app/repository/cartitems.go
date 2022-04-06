@@ -7,7 +7,7 @@ import (
 )
 
 type CartItemRepository struct {
-	db db.DB
+	db db.DB 
 }
 
 func NewCartItemRepository(db db.DB) CartItemRepository {
@@ -65,11 +65,8 @@ func (u *CartItemRepository) Save(cartItems []CartItem) error {
 }
 
 func (u *CartItemRepository) SelectAll() ([]CartItem, error) {
-	cartItems, err := u.LoadOrCreate()
-	if err != nil {
-		return nil, err
-	}
-	return cartItems, nil
+	//return []CartItem{}, nil
+	return u.LoadOrCreate()
 }
 
 func (u *CartItemRepository) Add(product Product) error {
@@ -78,48 +75,53 @@ func (u *CartItemRepository) Add(product Product) error {
 		return err
 	}
 
-	flag := false
-
 	for i := 0; i < len(carts); i++ {
 		if carts[i].ProductName == product.ProductName {
-			flag = true
 			carts[i].Quantity++
 			return u.Save(carts)
 		}
 	}
 
-	if flag == false {
-		carts = append(carts, CartItem{
-			Category:    product.Category,
-			ProductName: product.ProductName,
-			Price:       product.Price,
-			Quantity:    1,
-		})
-	}
+	carts = append(carts, CartItem{
+		Category:    product.Category,
+		ProductName: product.ProductName,
+		Price:       product.Price,
+		Quantity:    1,
+	})
 
 	return u.Save(carts)
-
 }
 
 func (u *CartItemRepository) ResetCartItems() error {
-	resetData := [][]string{
+	//return nil
+	u.db.Delete("cart_items")
+
+	var resetData = [][]string{
 		{"category", "product_name", "price", "quantity"},
 	}
-	return u.db.Save("cart_items", resetData)
-	// TODO: replace this
 
+	// error disini producs => cart_items
+	err := u.db.Save("cart_items", resetData)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (u *CartItemRepository) TotalPrice() (int, error) {
-	// TODO: replace this
-	cartItems, err := u.SelectAll()
+	
+
+	carts, err := u.LoadOrCreate()
 	if err != nil {
 		return 0, err
 	}
+
 	totalPrice := 0
 
-	for _, cartItem := range cartItems {
-		totalPrice += (cartItem.Quantity * cartItem.Price)
+	for i := 0; i < len(carts); i++ {
+		totalPrice += carts[i].Price * carts[i].Quantity
 	}
-	return totalPrice, err
+
+	return totalPrice, nil
 }
