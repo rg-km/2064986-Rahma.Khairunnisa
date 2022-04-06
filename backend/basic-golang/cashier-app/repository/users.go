@@ -1,7 +1,9 @@
 package repository
 
 import (
-	"errors"
+	"fmt"
+	"strconv"
+
 	"github.com/ruang-guru/playground/backend/basic-golang/cashier-app/db"
 )
 
@@ -14,52 +16,57 @@ func NewUserRepository(db db.DB) UserRepository {
 }
 
 func (u *UserRepository) LoadOrCreate() ([]User, error) {
-	data, err := u.db.Load("users")
+	record, err := u.db.Load("users")
 	if err != nil {
-		var record = [][]string {{
-			"username", "password", "loggedin",
-		}}
+		record = [][]string{
+			{"username", "password", "loggedin"},
+		}
 		if err := u.db.Save("users", record); err != nil {
 			return nil, err
 		}
 	}
 
-	var users []User
-
-	for _, dat := range data {
+	result := make([]User, 0)
+	for i := 1; i < len(record); i++ {
+		loggedin, err := strconv.ParseBool(record[i][2])
+		if err != nil {
+			return nil, err
+		}
 		user := User{
-			Username: dat[0],
-			Password: dat[1],
+			Username: record[i][0],
+			Password: record[i][1],
+			Loggedin: loggedin,
 		}
-		if dat[2] == "true" {
-			user.Loggedin = true
-		} else {
-			user.Loggedin = false
-		}
-
-		users = append(users, user)
+		result = append(result, user)
 	}
-	return users, nil // TODO: replace this
+	return result, nil
 }
 
 func (u *UserRepository) SelectAll() ([]User, error) {
-	return u.LoadOrCreate() // TODO: replace this
+	users, err := u.LoadOrCreate()
+	if err != nil {
+		return nil, err
+	}
+	return users, nil
 }
 
 func (u UserRepository) Login(username string, password string) (*string, error) {
+
+	if err := u.LogoutAll(); err != nil {
+		return nil, err
+	}
+
 	users, err := u.SelectAll()
 	if err != nil {
 		return nil, err
 	}
-
 	for _, user := range users {
 		if user.Username == username && user.Password == password {
 			u.changeStatus(username, true)
-			return &username, nil
+			return &user.Username, nil
 		}
 	}
-
-	return nil, errors.New("username & password invalid")
+	return nil, fmt.Errorf("Login Failed")
 }
 
 func (u *UserRepository) FindLoggedinUser() (*string, error) {
@@ -67,48 +74,37 @@ func (u *UserRepository) FindLoggedinUser() (*string, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	for _, user := range users {
 		if user.Loggedin {
 			return &user.Username, nil
 		}
 	}
-
-	return nil, errors.New("no user is logged in")
-	
+	return nil, fmt.Errorf("no user is logged in")
 }
 
 func (u *UserRepository) Logout(username string) error {
-	user,err := u.FindLoggedinUser()
+	userLogin, err := u.FindLoggedinUser()
 	if err != nil {
 		return err
 	}
-	u.changeStatus(*user, false)
-	
-	
-	return nil // TODO: replace this
+	if userLogin == nil {
+		return fmt.Errorf("no user is logged in")
+	}
+	return u.changeStatus(*userLogin, false)
 }
 
 func (u *UserRepository) Save(users []User) error {
-	record := [][]string{{
-		"username", "password", "loggedin",
-	}}
-
-	for _, user := range users {
-		newRow := []string{
-			user.Username, user.Password,
-		}
-
-		if user.Loggedin == true {
-			newRow = append(newRow, "true")
-		} else {
-			newRow = append(newRow, "false")
-		}
-
-		record = append(record, newRow)
+	records := [][]string{
+		{"username", "password", "loggedin"},
 	}
-
-	return u.db.Save("users", record)
+	for i := 0; i < len(users); i++ {
+		records = append(records, []string{
+			users[i].Username,
+			users[i].Password,
+			strconv.FormatBool(users[i].Loggedin),
+		})
+	}
+	return u.db.Save("users", records)
 }
 
 func (u *UserRepository) changeStatus(username string, status bool) error {
@@ -116,25 +112,22 @@ func (u *UserRepository) changeStatus(username string, status bool) error {
 	if err != nil {
 		return err
 	}
-
 	for i := 0; i < len(users); i++ {
 		if users[i].Username == username {
-			users[i].Loggedin = true
+			users[i].Loggedin = status
+			return u.Save(users)
 		}
 	}
-
-	return u.Save(users)
+	return fmt.Errorf("User not found")
 }
 
 func (u *UserRepository) LogoutAll() error {
-	user, err := u.SelectAll()
+	users, err := u.SelectAll()
 	if err != nil {
 		return err
 	}
-
-	for _, user := range user{
+	for _, user := range users {
 		u.Logout(user.Username)
 	}
-
-	return nil // TODO: replace this
+	return nil
 }

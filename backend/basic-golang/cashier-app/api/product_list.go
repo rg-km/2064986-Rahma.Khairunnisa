@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -20,5 +21,31 @@ type ProductListSuccessResponse struct {
 }
 
 func (api *API) productList(w http.ResponseWriter, req *http.Request) {
-	encoder.Encode(ProductListSuccessResponse{Products: []Product{}}) // TODO: replace this
+	encoder := json.NewEncoder(w)
+
+	response := ProductListSuccessResponse{}
+	response.Products = make([]Product, 0)
+
+	products, err := api.productsRepo.SelectAll()
+	defer func() {
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			encoder.Encode(DashboardErrorResponse{Error: err.Error()})
+			return
+		}
+	}()
+	if err != nil {
+		return
+	}
+
+	fmt.Println(products)
+	for _, Barang := range products{
+		response.Products = append(response.Products,Product{
+			Name: Barang.ProductName,
+			Price: Barang.Price,
+			Category: Barang.Category,
+		})
+	}
+
+	encoder.Encode(ProductListSuccessResponse{Products: response.Products}) // TODO: replace this
 }

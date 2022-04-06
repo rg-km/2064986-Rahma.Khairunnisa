@@ -2,11 +2,12 @@ package repository
 
 import (
 	"strconv"
+
 	"github.com/ruang-guru/playground/backend/basic-golang/cashier-app/db"
 )
 
 type CartItemRepository struct {
-	db db.DB 
+	db db.DB
 }
 
 func NewCartItemRepository(db db.DB) CartItemRepository {
@@ -64,8 +65,11 @@ func (u *CartItemRepository) Save(cartItems []CartItem) error {
 }
 
 func (u *CartItemRepository) SelectAll() ([]CartItem, error) {
-	//return []CartItem{}, nil
-	return u.LoadOrCreate()
+	cartItems, err := u.LoadOrCreate()
+	if err != nil {
+		return nil, err
+	}
+	return cartItems, nil
 }
 
 func (u *CartItemRepository) Add(product Product) error {
@@ -94,24 +98,41 @@ func (u *CartItemRepository) Add(product Product) error {
 	}
 
 	return u.Save(carts)
+
+	// record := [][]string{
+	// 	{"category", "product_name", "price", "quantity"},
+	// }
+	// for i := 0; i < len(record); i++ {
+	// 	record = append(record, []string{
+	// 		product.Category,
+	// 		product.ProductName,
+	// 		strconv.Itoa(product.Price),
+	// 		"1",
+	// 	})
+	// }
+	//return u.Save(carts)
+	// TODO: replace this
 }
 
 func (u *CartItemRepository) ResetCartItems() error {
-	return nil // TODO: replace this
+	resetData := [][]string{
+		{"category", "product_name", "price", "quantity"},
+	}
+	return u.db.Save("cart_items", resetData)
+	//return nil // TODO: replace this
+
 }
 
 func (u *CartItemRepository) TotalPrice() (int, error) {
-
-	carts, err := u.LoadOrCreate()
+	//return 0, nil // TODO: replace this
+	cartItems, err := u.SelectAll()
 	if err != nil {
 		return 0, err
 	}
-
 	totalPrice := 0
 
-	for _, cart := range carts {
-		totalPrice += (cart.Quantity * cart.Price)
+	for _, cartItem := range cartItems {
+		totalPrice += (cartItem.Quantity * cartItem.Price)
 	}
-
-	return totalPrice, nil
+	return totalPrice, err
 }
