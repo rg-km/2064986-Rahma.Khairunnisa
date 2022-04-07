@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"html/template"
 )
 
@@ -21,6 +22,57 @@ type Leaderboard struct {
 }
 
 func ExecuteToByteBuffer(leaderboard Leaderboard) ([]byte, error) {
-	var textTemplate string
 	// TODO: answer here
+	textTemplate := `{{range .Users}}Peringkat ke-{{.Rank}}: {{.Name}} {{end}}`
+
+	tmpl, err := template.New("test").Parse(textTemplate)
+	if err != nil {
+		return nil, err
+	}
+
+	var b bytes.Buffer
+
+	err = tmpl.Execute(&b, leaderboard)
+	if err != nil {
+		return nil, err
+	}
+
+	return b.Bytes(), nil
+
+}
+
+func main() {
+	users := []*UserRank{
+		{
+			Name: "Roger",
+			Rank: 1,
+		},
+		{
+			Name: "Tony",
+			Rank: 2,
+		},
+		{
+			Name: "Bruce",
+			Rank: 3,
+		},
+		{
+			Name: "Natasha",
+			Rank: 4,
+		},
+		{
+			Name: "Clint",
+			Rank: 5,
+		},
+	}
+
+	leaderboardObject := Leaderboard{
+		Users: users,
+	}
+
+	b, err := ExecuteToByteBuffer(leaderboardObject)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(string(b))
 }

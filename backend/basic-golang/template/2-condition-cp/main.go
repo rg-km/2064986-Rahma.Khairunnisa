@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"html/template"
 )
 
@@ -17,7 +18,37 @@ type Account struct {
 }
 
 func ExecuteToByteBuffer(account Account) ([]byte, error) {
-	var textTemplate string
 	// TODO: answer here
+	textTemplate := `{{if (gt .Balance 0) }}Akun {{ .Name }} dengan Nomor {{ .Number }} memiliki saldo sebesar ${{ .Balance }}.{{ else }}Akun {{ .Name }} dengan Nomor {{ .Number }} tidak memiliki saldo.{{ end }}`
+
+	tmpl, err := template.New("test").Parse(textTemplate)
+	if err != nil {
+		return nil, err
+	}
+
+	var b bytes.Buffer
+
+	err = tmpl.Execute(&b, account)
+	if err != nil {
+		return nil, err
+	}
+
+	return b.Bytes(), nil
+
+}
+
+func main() {
+	account := Account{
+		Name:    "Tony",
+		Number:  "1002321",
+		Balance: 0,
+	}
+
+	b, err := ExecuteToByteBuffer(account)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(string(b))
 	
 }
