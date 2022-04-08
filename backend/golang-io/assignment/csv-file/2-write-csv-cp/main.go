@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/csv"
-	"log"
 	"os"
 	"strconv"
 )
@@ -20,5 +19,15 @@ func WriteToCSV(fileName string, records []Menu) error {
 	defer csvFile.Close()
 
 	// TODO: answer here
+	csvWriter := csv.NewWriter(csvFile)
+	defer csvWriter.Flush()
+
+	for _, record := range records {
+		row := []string{record.Name, strconv.Itoa(record.Price)}
+		if err := csvWriter.Write(row); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
