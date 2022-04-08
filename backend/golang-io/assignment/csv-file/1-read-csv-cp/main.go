@@ -13,25 +13,28 @@ func main() {
 
 func CSVToMap(data map[string]string, fileName string) (map[string]string, error) {
 	// TODO: answer here
-	file, err := os.Open(filename)
+	f, err := os.Open("questions.csv")
 	if err != nil {
-		return nil, err
+		return data, err
 	}
 
-	reader := csv.NewReader(file)
+	defer f.Close()
+
+	r := csv.NewReader(f)
 
 	for {
-		record, err := reader.Read()
+		record, err := r.Read()
 		if err == io.EOF {
 			break
 		}
 
-		if, err != nil {
-			return nil, err
+		if err != nil {
+			return data, err
 		}
-		data[record[0]] = record[1]
 
+		data[record[0]] = record[1]
 	}
-	return data, err
+
+	return data, nil
 
 }

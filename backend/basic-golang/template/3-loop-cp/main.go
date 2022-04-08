@@ -22,26 +22,31 @@ type Leaderboard struct {
 }
 
 func ExecuteToByteBuffer(leaderboard Leaderboard) ([]byte, error) {
-	// TODO: answer here
+
 	textTemplate := `{{range .Users}}Peringkat ke-{{.Rank}}: {{.Name}} {{end}}`
 
+	
 	tmpl, err := template.New("test").Parse(textTemplate)
 	if err != nil {
 		return nil, err
 	}
 
+	
 	var b bytes.Buffer
 
+	
 	err = tmpl.Execute(&b, leaderboard)
 	if err != nil {
 		return nil, err
 	}
 
+	
 	return b.Bytes(), nil
 
 }
 
 func main() {
+	
 	users := []*UserRank{
 		{
 			Name: "Roger",
@@ -65,14 +70,18 @@ func main() {
 		},
 	}
 
+	
 	leaderboardObject := Leaderboard{
 		Users: users,
 	}
 
+	
 	b, err := ExecuteToByteBuffer(leaderboardObject)
 	if err != nil {
 		panic(err)
 	}
 
+	
 	fmt.Println(string(b))
+
 }
