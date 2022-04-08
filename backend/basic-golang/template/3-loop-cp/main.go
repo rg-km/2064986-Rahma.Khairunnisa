@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 	"html/template"
 )
 
@@ -12,76 +11,27 @@ import (
 // Pada setiap loop, cetak "Peringkat ke-n: Nama", contoh: "Peringkat ke-1: Roger"
 
 type UserRank struct {
-	Name  string
-	Email string
-	Rank  int
+	Name string
+	Rank int
 }
 
 type Leaderboard struct {
 	Users []*UserRank
 }
 
+// Peringkat ke-1: RogerPeringkat ke-2: TonyPeringkat ke-3: BrucePeringkat ke-4: NatashaPeringkat ke-5: Clint
 func ExecuteToByteBuffer(leaderboard Leaderboard) ([]byte, error) {
-
-	textTemplate := `{{range .Users}}Peringkat ke-{{.Rank}}: {{.Name}} {{end}}`
-
-	
+	// TODO: answer here
+	textTemplate := `{{range . }}Peringkat ke-{{ .Rank }}: {{ .Name }}{{else}} Invalid "struct" Users harus berupa array!{{end}}`
 	tmpl, err := template.New("test").Parse(textTemplate)
 	if err != nil {
-		return nil, err
+		panic(err)
 	}
-
-	
-	var b bytes.Buffer
-
-	
-	err = tmpl.Execute(&b, leaderboard)
-	if err != nil {
-		return nil, err
-	}
-
-	
-	return b.Bytes(), nil
-
-}
-
-func main() {
-	
-	users := []*UserRank{
-		{
-			Name: "Roger",
-			Rank: 1,
-		},
-		{
-			Name: "Tony",
-			Rank: 2,
-		},
-		{
-			Name: "Bruce",
-			Rank: 3,
-		},
-		{
-			Name: "Natasha",
-			Rank: 4,
-		},
-		{
-			Name: "Clint",
-			Rank: 5,
-		},
-	}
-
-	
-	leaderboardObject := Leaderboard{
-		Users: users,
-	}
-
-	
-	b, err := ExecuteToByteBuffer(leaderboardObject)
+	var a bytes.Buffer
+	err = tmpl.Execute(&a, leaderboard.Users)
 	if err != nil {
 		panic(err)
 	}
 
-	
-	fmt.Println(string(b))
-
+	return a.Bytes(), nil
 }
