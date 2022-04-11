@@ -15,6 +15,7 @@ const config = {
       use: { ...devices['Desktop Firefox'] },
     },
   ],
+  globalTimeout: 3 * 60 * 1000, // 3 minutes
 };
 
 module.exports = config;
