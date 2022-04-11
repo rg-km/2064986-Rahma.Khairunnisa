@@ -25,9 +25,25 @@ func main() {
 }
 
 func Sort(arr []int) []int {
-	return []int{} // TODO: replace this
+	// return []int{} // TODO: replace this
+	var swap = true
+	for swap {
+		swap = false
+		for i := 1; i<len(arr);i++{
+			if arr[i-1]>arr[i]{
+				arr[i-1],arr[i]=arr[i], arr[i-1]
+				swap = true
+			}
+		}
+	}
+	return arr
 }
 
 func RotateLeft(d int, arr []int) []int {
-	return []int{} // TODO: replace this
+	// return []int{} // TODO: replace this
+	for i := 0; i<d; i++ {
+		arr = append(arr[1:], arr[0])
+	}
+	return arr
+
 }

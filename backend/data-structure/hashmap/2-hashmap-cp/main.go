@@ -27,5 +27,5 @@ func main() {
 }
 
 func AnagramsChecker(str1 string, str2 string) string {
-	return "" // TODO: replace this
+	// return "" // TODO: replace this
 }

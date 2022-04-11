@@ -14,9 +14,9 @@ func main() {
 }
 
 func AgeDistribution(people []Person) map[int]int {
-	return map[int]int{} // TODO: replace this
+	//return map[int]int{} // TODO: replace this
 }
 
 func FilterByAge(people []Person, age int) []Person {
-	return []Person{} // TODO: replace this
+	// return []Person{} // TODO: replace this
 }

@@ -13,6 +13,7 @@ type Employee struct {
 
 // TODO: answer here
 
+
 func main() {
 	employee1 := Employee{Name: "bob", BaseSalary: 4000000, Bonus: 300000}
 	fmt.Println("sebelum bonus dinaikkan")
