@@ -15,8 +15,21 @@ func main() {
 
 func AgeDistribution(people []Person) map[int]int {
 	//return map[int]int{} // TODO: replace this
+	AgeDistribution := make(map[int]int)
+	for _, person := range people {
+		AgeDistribution[person.age]++
+	}
+	return AgeDistribution
 }
 
 func FilterByAge(people []Person, age int) []Person {
 	// return []Person{} // TODO: replace this
+	var result []Person
+	for _, person := range people {
+		if person.age == age {
+			result = append(result,person)
+
+		}
+	}
+	return result 
 }
