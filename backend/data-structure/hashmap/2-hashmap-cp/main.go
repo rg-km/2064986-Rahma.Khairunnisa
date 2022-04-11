@@ -28,4 +28,36 @@ func main() {
 
 func AnagramsChecker(str1 string, str2 string) string {
 	// return "" // TODO: replace this
+	if len(str1) != len(str2) {
+		return "Bukan Anagram"
+	}
+	var map1 = make(map[int32]int)
+	var map2 = make(map[int32]int)
+
+	for i := 0; i < len(str1); i++ {
+		var key = int32(str1[i])
+
+		if _, ok := map1[key]; ok {
+			map1[key]++
+		} else {
+			map1[key] = 1
+		}
+		
+	}
+
+	for i := 0; i < len(str2); i++ {
+		var key = int32(str2[i])
+
+		if _, ok := map2[key]; ok {
+			map2[key]++
+		} else {
+			map2[key] = 1
+		}
+	}
+	for key, value := range map1 {
+		if map2[key] != value {
+			return "Bukan Anagram"
+		}
+	}
+	return "Anagram"
 }

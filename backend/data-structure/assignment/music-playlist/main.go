@@ -47,12 +47,15 @@ func NewMusicPlayer() MusicPlayer {
 
 func (mp *MusicPlayer) AddSong(song Song) {
 	// TODO: answer here
+
 }
 
 func (mp *MusicPlayer) Play() string {
 	// TODO: answer here
+
 }
 
 func (p *Playlist) Repeat() {
 	// TODO: answer here
+	
 }
