@@ -23,11 +23,13 @@ func (s *Set) Add(elem string) {
 // Delete - menghapus elemen dari set
 func (s *Set) Delete(elem string) (bool, error) {
 	//return fmt.Errorf("replace this with your code") // TODO: replace this
+
 }
 
 // Contains - memeriksa apakah elemen ada dalam set
 func (s *Set) Contains(elem string) bool {
-	return false // TODO: replace this
+	//return false // TODO: replace this
+	
 }
 
 // List - menampilkan elemen dari set

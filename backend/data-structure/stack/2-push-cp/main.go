@@ -10,12 +10,15 @@ var ErrStackOverflow = errors.New("stack overflow")
 
 type Stack struct {
 	// TODO: answer here
+
 }
 
 func NewStack(size int) Stack {
 	// TODO: answer here
+
 }
 
 func (s *Stack) Push(Elemen int) error {
 	// TODO: answer here
+	
 }
