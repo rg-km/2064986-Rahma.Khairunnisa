@@ -29,7 +29,7 @@ func Intersection(str1, str2 []string) (inter []string) {
 }
 
 for _, item := range str2 {
-		if _, ok := m[item]; ok {
+		if m[item] {
 				inter = append(inter, item)
 		}
 }
@@ -38,15 +38,12 @@ return
 
 func RemoveDuplicates(elements []string) (nodups []string) {
 	//return []string{} // TODO: replace this
-	keys := make(map[string]bool)
-    list := []string{}
-
-	for _, entry := range string {
-        if _, value := keys[entry]; !value {
-            keys[entry] = true
-            list = append(list, entry)
+	encountered := make(map[string]bool)
+    for _, element := range elements {
+        if !encountered[element] {
+            nodups = append(nodups, element)
+            encountered[element] = true
         }
     }
-    return list
-
+    return
 }
