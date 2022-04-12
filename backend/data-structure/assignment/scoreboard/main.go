@@ -18,7 +18,22 @@ func (s Scores) Len() int {
 }
 
 func (s Scores) Less(i, j int) bool {
-	return false // TODO: replace this
+	//return false // TODO: replace this
+	A := 4*s[i].Correct-1*s[i].Wrong
+	B := 4*s[j].Correct-1*s[j].Wrong
+
+	if A > B {
+		return true
+	} else if A < B {
+		return false
+	}
+	
+	if s[i].Correct > s[j].Correct {
+		return true
+	} else if s[i].Correct < s[j].Correct {
+		return false
+	}
+	return s[i].Name < s[j].Name
 }
 
 func (s Scores) Swap(i, j int) {

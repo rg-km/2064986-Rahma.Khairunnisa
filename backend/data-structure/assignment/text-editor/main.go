@@ -27,16 +27,20 @@ func NewTextEditor() *TextEditor {
 
 func (te *TextEditor) Write(ch rune) {
 	// TODO: answer here
+
 }
 
 func (te *TextEditor) Read() []rune {
 	// TODO: answer here
+
 }
 
 func (te *TextEditor) Undo() {
 	// TODO: answer here
+
 }
 
 func (te *TextEditor) Redo() {
 	// TODO: answer here
+	
 }

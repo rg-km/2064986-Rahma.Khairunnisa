@@ -22,7 +22,7 @@ func (s *Set) Add(elem string) {
 
 // Delete - menghapus elemen dari set
 func (s *Set) Delete(elem string) (bool, error) {
-	return fmt.Errorf("replace this with your code") // TODO: replace this
+	//return fmt.Errorf("replace this with your code") // TODO: replace this
 }
 
 // Contains - memeriksa apakah elemen ada dalam set

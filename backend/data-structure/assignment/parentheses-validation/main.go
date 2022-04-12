@@ -26,4 +26,36 @@ import "github.com/ruang-guru/playground/backend/data-structure/assignment/paren
 
 func IsValidParentheses(s string) bool {
 	// TODO: answer here
+	if len(s) % 2 != 0 {
+		return false
+	}
+
+	opens := map[string]string{
+		"(": ")",
+		"[": "]",
+		"{": "}",
+	}
+
+	opensLog := make([]string, 0, len(s) / 2)
+
+	for _, x := range s {
+		s := string(x)
+
+		if openClose, isOpen := opens[s]; isOpen {
+			opensLog = append(opensLog, openClose)
+			continue
+		}
+
+		if len(opensLog) == 0 {
+			return false
+		}
+
+		if opensLog[len(opensLog)-1] != s {
+			return false
+		}
+
+		opensLog = opensLog[:len(opensLog)-1]
+	}
+
+	return len(opensLog) == 0
 }

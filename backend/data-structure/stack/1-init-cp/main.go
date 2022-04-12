@@ -5,8 +5,11 @@ package main
 // Lengkapi function NewStack sehingga function tersebut dapat mengembalikan objek Stack dengan memiliki ukuran dari parameter.
 type Stack struct {
 	// TODO: answer here
+	Top int
+	Data []int
 }
 
 func NewStack(size int) Stack {
 	// TODO: answer here
+	
 }

@@ -39,6 +39,8 @@ package main
 
 import "fmt"
 
+
+
 func main() {
 	var students = []int{1, 1, 1, 0, 0, 1}
 	var sandwiches = []int{1, 0, 0, 0, 1, 1}
@@ -46,5 +48,6 @@ func main() {
 }
 
 func CountStudents(students []int, sandwiches []int) int {
-	0 // TODO: replace this
+	 // TODO: replace this
+
 }
