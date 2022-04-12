@@ -65,5 +65,6 @@ func (node ListNode) MiddleNode(head *ListNode) *ListNode {
 		l++
 	}
 	// TODO: answer here
+	
 	return head
 }
