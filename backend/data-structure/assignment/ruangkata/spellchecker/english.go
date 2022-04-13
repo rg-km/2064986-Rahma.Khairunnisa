@@ -9,7 +9,7 @@ import (
 )
 
 const url string = "https://gist.githubusercontent.com/fikriauliya/25c107ae057d3dc87abdb5dfb2f330b6/raw/639d54126b27c57651ac42ef8ece3c5c92a3d76b/en"
-const filePath string = "./english-words.csv"
+const filePath string = "english-words.csv"
 
 type spellchecker struct {
 	words map[string]bool
@@ -49,9 +49,27 @@ func NewEnglishSpellChecker() (SpellChecker, error) {
 }
 
 func (s *spellchecker) CheckWord(word string) bool {
-	return false // TODO: replace this
+	//return false // TODO: replace this
+	words := strings.Split(word, " ")
+	for _, w := range words {
+		if !s.words[w] {
+			return false
+		}
+	}
+	return true
 }
 
 func (s *spellchecker) CheckSentence(sentence string) (validWords []string, invalidWords []string) {
-	return nil, nil // TODO: replace this
+	//return nil, nil // TODO: replace this
+	words := strings.Split(sentence, " ")
+	validWords = make([]string, 0)
+	invalidWords = make([]string, 0)
+	for _, w := range words {
+		if s.words[w] {
+			validWords = append(validWords, w)
+		} else {
+			invalidWords = append(invalidWords, w)
+		}
+	}
+	return validWords, invalidWords
 }
