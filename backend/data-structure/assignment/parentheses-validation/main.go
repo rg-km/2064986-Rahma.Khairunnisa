@@ -26,36 +26,34 @@ import "github.com/ruang-guru/playground/backend/data-structure/assignment/paren
 
 func IsValidParentheses(s string) bool {
 	// TODO: answer here
-	if len(s) % 2 != 0 {
+	var stacks stack.Stack = stack.Stack{
+		Top:  -1,
+		Data: nil,
+	}
+
+	if len(s)%2 == 1 || s == "" {
 		return false
 	}
 
-	opens := map[string]string{
-		"(": ")",
-		"[": "]",
-		"{": "}",
+	for i := 0; i < len(s); i++ {
+		var current rune = rune(s[i])
+		if current == '(' || current == '{' || current == '[' {
+			stacks.Push(current)
+		}
+
+		if current == ')' || current == '}' || current == ']' {
+			if stacks.IsEmpty() {
+				return false
+			}
+
+			inData, _ := stacks.Peek()
+			if inData == '(' && current == ')' || inData == '{' && current == '}' || inData == '[' && current == ']' {
+				_, _ = stacks.Pop()
+			} else {
+				return false
+			}
+		}
 	}
 
-	opensLog := make([]string, 0, len(s) / 2)
-
-	for _, x := range s {
-		s := string(x)
-
-		if openClose, isOpen := opens[s]; isOpen {
-			opensLog = append(opensLog, openClose)
-			continue
-		}
-
-		if len(opensLog) == 0 {
-			return false
-		}
-
-		if opensLog[len(opensLog)-1] != s {
-			return false
-		}
-
-		opensLog = opensLog[:len(opensLog)-1]
-	}
-
-	return len(opensLog) == 0
+	return stacks.IsEmpty()	
 }

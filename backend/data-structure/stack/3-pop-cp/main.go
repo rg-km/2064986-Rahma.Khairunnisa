@@ -20,4 +20,5 @@ func (s *Stack) Push(Elemen int) error {
 
 func (s *Stack) Pop() (int, error) {
 	// TODO: answer here
+	
 }

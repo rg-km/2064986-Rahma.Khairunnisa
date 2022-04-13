@@ -104,11 +104,13 @@ func main() {
 }
 
 func (q Queue) InsertRear(rearValue string) (Queue, error) {
-	return q, nil // TODO: replace this
+   // TODO: replace this
+  
 }
 
 func (q Queue) InsertFront(frontValue string) (Queue, error) {
-	return q, nil // TODO: replace this
+   // TODO: replace this
+   
 }
 
 func (q Queue) deleteRear() (string, error) {
