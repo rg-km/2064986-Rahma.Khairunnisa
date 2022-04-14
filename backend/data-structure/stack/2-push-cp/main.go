@@ -11,6 +11,7 @@ var ErrStackOverflow = errors.New("stack overflow")
 type Stack struct {
 	// TODO: answer here
 	Top  int
+	Size int
     Data []int
 }
 
@@ -18,16 +19,19 @@ func NewStack(size int) Stack {
 	// TODO: answer here
 	return Stack {
 		Top: -1,
-		Data: make([]int, size)
+		Data: []int{},
+		Size: size,
 	}
 
 }
 
 func (s *Stack) Push(Elemen int) error {
 	// TODO: answer here
-	if s.Top == len(s.Data) {
+	if s.Top == s.Size-1 {
 		return ErrStackOverflow
 	}
 	s.Top ++
     s.Data = append(s.Data, Elemen)
+
+	return nil
 }
