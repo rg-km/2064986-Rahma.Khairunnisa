@@ -11,5 +11,7 @@ type Stack struct {
 
 func NewStack(size int) Stack {
 	// TODO: answer here
-	
+	return &stack{
+		Top: -1,
+	}
 }
