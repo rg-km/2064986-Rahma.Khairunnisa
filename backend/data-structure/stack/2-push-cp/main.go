@@ -16,11 +16,18 @@ type Stack struct {
 
 func NewStack(size int) Stack {
 	// TODO: answer here
+	return Stack {
+		Top: -1,
+		Data: make([]int, size)
+	}
 
 }
 
 func (s *Stack) Push(Elemen int) error {
 	// TODO: answer here
-	s.Top += 1
+	if s.Top == len(s.Data) {
+		return ErrStackOverflow
+	}
+	s.Top ++
     s.Data = append(s.Data, Elemen)
 }
