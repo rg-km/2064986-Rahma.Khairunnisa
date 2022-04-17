@@ -7,11 +7,14 @@ type Stack struct {
 	// TODO: answer here
 	Top int
 	Data []int
+	Size int
 }
 
 func NewStack(size int) Stack {
 	// TODO: answer here
-	return &stack{
+	return Stack{
 		Top: -1,
+		Size: size,
+		Data: []int{},
 	}
 }
