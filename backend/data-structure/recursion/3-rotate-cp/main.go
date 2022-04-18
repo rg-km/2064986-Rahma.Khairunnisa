@@ -19,17 +19,14 @@ func Rotate(index int, args []int) []int {
 	if len(args) == 0 {
 		return []int{}
 	}
-
 	if index == -1 {
 		return args
 	}
-
 	if index == 0 {
 		// TODO: answer here
 		
 		return Rotate(1, args)
 	}
-
 	if index == len(args)-1 {
 		return Rotate(-1, args)
 	}

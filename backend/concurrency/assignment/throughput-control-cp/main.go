@@ -22,6 +22,7 @@ func doubleCalculatorWorker(queue chan request, maxThroughput int, maxObservedTh
 	mu := &sync.Mutex{}
 	for req := range queue {
 		// TODO: answer here
+
 		go func(req request) {
 			mu.Lock()
 			curThroughtput++
@@ -39,6 +40,7 @@ func doubleCalculatorWorker(queue chan request, maxThroughput int, maxObservedTh
 			mu.Unlock()
 
 			// TODO: answer here
+			
 		}(req)
 	}
 	maxObservedThroughtputC <- maxObservedThroughtput
