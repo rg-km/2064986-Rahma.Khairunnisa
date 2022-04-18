@@ -20,6 +20,7 @@ func (c *character) awake(movementInput, attackInput chan string) {
 		//ketika menerima dari movementInput maka jalankan
 		//fmt.Printf("%s bergerak ke %s\n", c.name, c.activity)
 		// TODO: answer here
+		var 
 
 	}
 }

@@ -60,11 +60,13 @@ func TowerOfHanoi(n int, fromRod string, auxRod string, toRod string) {
 	if n == 0 {
 		return
 	}
-
 	// TODO: answer here
+	
+
 	
 	Solution = append(Solution, fmt.Sprintf("Move disk %d from rod %s to rod %s", n, fromRod, toRod))
 	// TODO: answer here
+	
 }
 
 func main() {
