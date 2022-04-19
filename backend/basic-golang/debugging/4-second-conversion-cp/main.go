@@ -23,12 +23,22 @@ func main() {
 
 func ConvertSecondToTimeString(second int) string {
 	hours := second / 3600
+	second = second - (3600*hours)
 	minutes := second / 60
-
+	second = second - (60*minutes)
+	
 	timeString := fmt.Sprintf("%d:%d:%d", hours, minutes, second)
 	return timeString
 }
 
 func ConvertSecondToTimeStringCorrect(second int) string {
-	return "" // TODO: replace this
+	//return "" // TODO: replace this
+	hours := second / 3600
+	second = second - (3600*hours)
+	minutes := second / 60
+	second = second - (60*minutes)
+	
+	timeString := fmt.Sprintf("%02d:%02d:%02d", hours, minutes, second)
+	return timeString
+
 }

@@ -36,5 +36,5 @@ func CalculateChange(totalPayment, totalPrice float64) float64 {
 }
 
 func CalculateChangeCorrect(totalPayment, totalPrice float64) float64 {
-	return 0 // TODO: replace this
+	//return 0 // TODO: replace this
 }
