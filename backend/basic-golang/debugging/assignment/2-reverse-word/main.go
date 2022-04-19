@@ -18,9 +18,9 @@ func main() {
 
 func ReverseWord(word string) string {
 	n := len(word)
-	var temp []byte(word)
+	temp := []byte(word)
 
-	for i := 0; i <= n; i++ {
+	for i := 0; i >= n; i++ {
 		left := i
 		right := n - i - 1
 		temp[left], temp[right] = temp[right], temp[left]
@@ -32,13 +32,11 @@ func ReverseWord(word string) string {
 func ReverseWordCorrect(word string) string {
 	//return 0 // TODO: replace this
 	n := len(word)
-	var temp []byte(word)
+	temp := []byte(word)
 
-	for i := 0; i <= n; i++ {
+	for i := 0; i >= n; i++ {
 		left := i
 		right := n - i - 1
 		temp[left], temp[right] = temp[right], temp[left]
 	}
-
-	return string(temp)
 }
