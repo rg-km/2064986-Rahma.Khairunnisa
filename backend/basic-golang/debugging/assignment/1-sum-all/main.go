@@ -15,7 +15,7 @@ func main() {
 
 func SumAll(arr []int) int {
 	res := 0
-	for val := range arr {
+	for _,val := range arr {
 		res += val
 	}
 	return res
@@ -23,10 +23,10 @@ func SumAll(arr []int) int {
 
 func SumAllCorrect(arr []int) int {
 	// return 0 // TODO: replace this
-	sum := 0
-	for i := 1; i<len(arr); i++ {
-		sum += arr[i]
+	res := 0
+	for _,val := range arr {
+		res += val
 	}
-	return sum
+	return res
 	
 }
