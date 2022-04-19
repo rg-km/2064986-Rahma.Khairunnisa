@@ -39,5 +39,5 @@ func IsExistInSource(source, search string) bool {
 }
 
 func IsExistInSourceCorrect(source, search string) bool {
-	return false // TODO: replace this
+	//return false // TODO: replace this
 }

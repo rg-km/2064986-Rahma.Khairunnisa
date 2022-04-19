@@ -41,5 +41,5 @@ func ScoreRank(score int) string {
 }
 
 func ScoreRankCorrect(score int) string {
-	return "" // TODO: replace this
+	//return "" // TODO: replace this
 }
