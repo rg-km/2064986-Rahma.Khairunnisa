@@ -45,11 +45,15 @@ func IsExistInSourceCorrect(source, search string) bool {
 		idxSource := startSource
 
 		for idxSearch := 0; idxSearch < len(search); idxSearch++ {
-			if source[idxSource] != source[idxSearch] {
-				found = false
+			if source[idxSource] == search[idxSearch] {
+				found = true
 				break
 			}
+			found = false
 			idxSearch++
+			if idxSearch >= len(source) {
+				return false
+			}
 		}
 		if found {
 			return true
