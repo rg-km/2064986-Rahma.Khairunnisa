@@ -39,6 +39,4 @@ func ReverseWordCorrect(word string) string {
 		right := n - i - 1
 		temp[left], temp[right] = temp[right], temp[left]
 	}
-
-	return string(temp)
 }
