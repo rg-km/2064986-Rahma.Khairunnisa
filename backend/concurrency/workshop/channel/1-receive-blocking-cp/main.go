@@ -15,7 +15,7 @@ func receiveBlock(output chan int) {
 
 	//result menerima data dari channel c
 	// TODO: answer here
-	c <- result
+	result = <-c
 	output <- result
 	fmt.Println(c) //agar variabel c digunakan
 }
