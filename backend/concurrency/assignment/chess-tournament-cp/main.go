@@ -22,5 +22,16 @@ func playMatch(i int) {
 
 func startTournament() {
 	// TODO: answer here
+	c := make(chan int)
+	for i := 0; i < 10; i++ {
+		go func(i int) {
+			playMatch(i)
+			c <- i
+		}(i)
+	}
 	
 }
+for i := 0; i < 10; i++ {
+	<-c
+}
+fmt.Printf("tournament finished in %s\n", time.Since(start))
