@@ -29,9 +29,8 @@ func startTournament() {
 			c <- i
 		}(i)
 	}
-	
+	for i := 0; i < 10; i++ {
+		<-c
+    }
+	fmt.Printf("tournament finished in %s\n", time.Since(start))
 }
-for i := 0; i < 10; i++ {
-	<-c
-}
-fmt.Printf("tournament finished in %s\n", time.Since(start))
