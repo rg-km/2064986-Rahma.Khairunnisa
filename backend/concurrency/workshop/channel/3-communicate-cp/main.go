@@ -12,11 +12,14 @@ func communicate(output chan string) {
 		fmt.Println("send to channel c")
 		//kirim "hello"+name ke channel
 		// TODO: answer here
+		
+
 	}
 	go greet("steve")
 
 	receiveGreet := func() {
 		// TODO: answer here
+		
 		waitGoroutine <- struct{}{}
 	}
 	go receiveGreet()

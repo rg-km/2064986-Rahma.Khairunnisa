@@ -40,6 +40,7 @@ func main() {
 	}
 	//kapan terjadi blocking pada program ini ?
 	// TODO: answer here
+	
 }
 
 func longRunningProcess(taskID int) {
