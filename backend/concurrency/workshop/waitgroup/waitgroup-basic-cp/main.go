@@ -4,7 +4,6 @@ import "sync"
 
 func testWG(output chan<- []bool) {
 	// TODO: answer here
-	
 
 	done := make([]bool, 5)
 	for i := 0; i < 5; i++ {

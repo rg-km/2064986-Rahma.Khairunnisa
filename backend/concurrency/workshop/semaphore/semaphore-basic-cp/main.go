@@ -16,8 +16,10 @@ type worker struct {
 func (w *worker) doWork(input string) {
 	for i := 0; i < 100; i++ {
 		// TODO: answer here
+
 		go func() {
 			// TODO: answer here
+			
 			w.mu.Lock()
 			w.currentWork++
 			if w.maxWork < w.currentWork {

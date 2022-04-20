@@ -18,6 +18,7 @@ func start(name1, name2 string, output chan string) {
 
 	// menjalankan goroutine greet
 	// TODO: answer here
+	
 
 	//menerima data dari channel
 	// TODO: answer here
