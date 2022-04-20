@@ -12,7 +12,7 @@ func communicate(output chan string) {
 		fmt.Println("send to channel c")
 		//kirim "hello"+name ke channel
 		// TODO: answer here
-		waitGoroutine < - struct{}{}
+		waitGoroutine <- struct{}{}
 		c <- "hello" + name
 
 	}
