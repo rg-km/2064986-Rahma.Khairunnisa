@@ -10,6 +10,7 @@ func numberWorker(output chan int) {
 	for i := 0; i < 100; i++ {
 		//kirim ke channel
 		// TODO: answer here
+		output <- i
 
 	}
 	close(output)
@@ -20,8 +21,11 @@ func numberWorker(output chan int) {
 func receiver(result chan int) {
 	//buat channel dengan ukuran yang sesuai dengan data-
 	//yang akan dikirim numWorker
-	output:=make(chan int) // TODO: replace this
+	// output:= make(chan int, 1) // TODO: replace this
+	// sum := 0
+	output:= make(chan int, 1) 
 	sum := 0
+
 
 	go numberWorker(output)
 	time.Sleep(100 * time.Millisecond)
