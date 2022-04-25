@@ -34,16 +34,9 @@ require (
 
 require (
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-	github.com/gocarina/gocsv v0.0.0-20220310154401-d4df709ca055
-=======
->>>>>>> c0397392214e368e84db7e7b9a1534ca43781bfb
 	github.com/golang-jwt/jwt/v4 v4.4.1
 	github.com/gorilla/pat v1.0.1
 	github.com/gorilla/sessions v1.2.1
->>>>>>> 4943f8ccc490153c9679961f87e482793f89b804
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/kr/pretty v0.2.0 // indirect

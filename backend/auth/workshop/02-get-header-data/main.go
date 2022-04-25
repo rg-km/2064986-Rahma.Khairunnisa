@@ -23,7 +23,7 @@ func Routes() *http.ServeMux {
 		// 		  2. return unauthorized ketika token kosong
 		// 		  3. return bad request ketika field token tidak ada
 
-		return w.Write([]byte(fmt.Sprintf(""))) // TODO: replace this
+		// return w.Write([]byte(fmt.Sprintf(""))) // TODO: replace this
 	})
 
 	return mux
