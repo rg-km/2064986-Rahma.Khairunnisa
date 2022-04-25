@@ -21,10 +21,10 @@ func (c *character) awake(movementInput, attackInput chan string) {
 		select {
 		case attack := <-attackInput:
 			c.activity = attack
-			fmt.Printf("%s %s\n", c.name, c.defaultActivity)
-		case movement := <-movementInput:
-			c.activity = movement
-			fmt.Printf("%s %s\n", c.name, c.defaultActivity)
+			fmt.Printf("%s melakukan serangan %s\n", c.name, c.activity)
+		case move := <-movementInput:
+			c.activity = move
+			fmt.Printf("%s bergerak ke %s\n", c.name, c.activity)
 		default:
 			fmt.Printf("%s %s\n", c.name, c.defaultActivity)
 			time.Sleep(100 * time.Millisecond)
