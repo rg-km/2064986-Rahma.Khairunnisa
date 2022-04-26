@@ -8,15 +8,15 @@ func testWG(output chan<- []bool) {
 	done := make([]bool, 5)
 	for i := 0; i < 5; i++ {
 		// TODO: answer here
-		
+		var data = fmt.Sprintf("data %d", i)
 
 		go func(i int) {
 			// TODO: answer here
+
 			
 			done[i] = true
 		}(i)
 	}
-
 	// TODO: answer here
 	output <- done
 }
