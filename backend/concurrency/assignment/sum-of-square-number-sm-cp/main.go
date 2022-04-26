@@ -21,13 +21,13 @@ func createRequest(workerInput chan<- int, workerOutput <-chan int, wg *sync.Wai
 		// TODO: answer here
 		go func(i int) {
 			// TODO: answer here
-
+			
 			var res int
-
 			// TODO: answer here
-
+			workerInput <- i
 			//tambahkan res ke result. Selain itu gunakan juga sesuatu yang menghindari data race
 			// TODO: answer here
+			res = <- workerOutput
 			fmt.Println(res)
 		}(i)
 	}
