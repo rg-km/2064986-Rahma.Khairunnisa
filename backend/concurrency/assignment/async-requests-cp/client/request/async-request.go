@@ -8,14 +8,21 @@ import (
 )
 
 func AsyncHttpGets(urls []string) []*http.Response {
-	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Millisecond) //timeout 100ms
+	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Millisecond) // timeout 100ms
 	defer cancel()
 	ch := make(chan *http.Response)
 	responses := []*http.Response{}
 	// TODO: answer here
+	client := http.Client{}
+
 	for _, url := range urls {
 		go func(url string) {
 			// TODO: answer here
+			resp, err := client.Get(url)
+			if err != nil {
+				fmt.Println("error", err)
+			}
+			ch <- resp
 		}(url)
 	}
 
@@ -53,4 +60,4 @@ func SyncHttpGets(urls []string) []*http.Response {
 	return responses
 }
 
-//reference: https://matt.aimonetti.net/posts/2012-11-real-life-concurrency-in-go/
+// reference: https://matt.aimonetti.net/posts/2012-11-real-life-concurrency-in-go/
