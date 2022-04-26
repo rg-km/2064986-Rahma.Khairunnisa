@@ -8,7 +8,7 @@ import (
 )
 
 func AsyncHttpGets(urls []string) []*http.Response {
-	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Millisecond) //timeout 100ms
+	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Millisecond) // timeout 100ms
 	defer cancel()
 	ch := make(chan *http.Response)
 	responses := []*http.Response{}
@@ -60,4 +60,4 @@ func SyncHttpGets(urls []string) []*http.Response {
 	return responses
 }
 
-//reference: https://matt.aimonetti.net/posts/2012-11-real-life-concurrency-in-go/
+// reference: https://matt.aimonetti.net/posts/2012-11-real-life-concurrency-in-go/

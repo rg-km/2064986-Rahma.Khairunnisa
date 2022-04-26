@@ -35,7 +35,7 @@ func receiver(out <-chan *Work) {
 		//ke dalam map `data`
 		//gunakan mutex untuk mengamankan penulisan ke map secara concurrent
 
-		<-out // TODO: replace this
+		// <-out // TODO: replace this
 		<-out
 		// TODO: answer here
 	}
