@@ -21,20 +21,28 @@ func Routes() *http.ServeMux {
 		u, p, ok := r.BasicAuth()
 		if !ok {
 			// TODO: answer here
-			return
+			fmt.Println("Error parsing basic auth")
+			w.WriteHeader(401)
+		    return
 		}
 		if u != username {
 			// TODO: answer here
+			fmt.Printf("Username provided is correct: %s\n", u)
+			w.WriteHeader(401)
 			return
 		}
 		if p != password {
 			// TODO: answer here
-			return
+			fmt.Printf("Password provided is correct: %s\n", u)
+		    w.WriteHeader(401)
+		    return
 		}
 		fmt.Printf("Username: %s\n", u)
 		fmt.Printf("Password: %s\n", p)
 
 		// TODO: answer here
+		w.WriteHeader(200)
+
 	})
 
 	return mux
