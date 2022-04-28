@@ -37,9 +37,10 @@ func NewAPI(usersRepo repository.UserRepository, productsRepo repository.Product
 	// mux.HandleFunc("/api/cart/clear", api.clearCart)
 
 	// TODO: answer here
+
 	
-	mux.HandleFunc("/api/carts", api.cartList) //
-	mux.HandleFunc("/api/cart/clear", api.clearCart) //
+	//mux.HandleFunc("/api/carts", api.cartList) //
+	//mux.HandleFunc("/api/cart/clear", api.clearCart) //
 	// mux.HandleFunc("/api/cart/clear", api.clearCart)
 	// mux.HandleFunc("/api/carts", api.cartList)
 
