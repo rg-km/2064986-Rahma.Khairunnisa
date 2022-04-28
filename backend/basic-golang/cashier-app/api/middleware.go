@@ -33,10 +33,25 @@ func (api *API) AuthMiddleWare(next http.Handler) http.Handler {
 		//       3. return bad request ketika field token tidak ada
 
 		// TODO: answer here
+		c, err := r.Cookie(cookieFieldName)
 
+		if, err !n nil {
+			if err == http.ErrNoCookie {
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+		respond := fmt.Sprintf("Tokenmu adalah %s!", c.Value)
+		responByte := []byte(respond)
+		w.Write(responByte)
+	})
+		
 		// Task: Ambil value dari cookie token
 
 		// TODO: answer here
+
 
 		// Task: Deklarasi variable claim
 
@@ -51,6 +66,6 @@ func (api *API) AuthMiddleWare(next http.Handler) http.Handler {
 
 		// Task: Validasi
 
-		return next.ServeHTTP(w, r) // TODO: replace this
+		//return next.ServeHTTP(w, r) // TODO: replace this
 	})
 }

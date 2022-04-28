@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -20,10 +19,9 @@ func encryptToBcrypt(str string) (string, error) {
 	// Task: Hashing the password with the default cost of 10
 
 	//return "", nil // TODO: replace this
-	err = bcrypt.encryptToBcrypt(hashedStr)
-	fmt.Println(err)
-
+	hashedStr, err := bcrypt.GenerateFromPassword([]byte(str), bcrypt.DefaultCost)
+	if err != nil {
+		return "", err
 	}
-	return string(b), nil
-	
+	return string(hashedStr), nil
 }

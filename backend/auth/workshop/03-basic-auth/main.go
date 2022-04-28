@@ -27,23 +27,46 @@ func Routes() *http.ServeMux {
 		// Task:  Buat JSON body diconvert menjadi credential struct & return bad request ketika terjadi kesalahan decoding json
 
 		// TODO: answer here
+		err := json.NewDecoder(r.Body).Decode(&creds)
+		if err != nil {
+			// return bad request ketika terjadi kesalahan decoding json
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
 
 		// Task: Ambil password dari username yang dipakai untuk login
 
 		// TODO: answer here
+		expectedPassword, ok := users[creds.Username]
 
 		// Task: return unauthorized jika password salah
 
 		// TODO: answer here
+		if !ok || expectedPassword != creds.Password {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
 
 		// Task: 1. Buat token string menggunakan bcrypt dari credential username
 		// 		 2. return internal server error ketika terjadi kesalahan encrypting token
 
 		// TODO: answer here
+		tokenString, err := bcrypt.GenerateFromPassword([]byte(creds.Username), bcrypt.DefaultCost)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
 
 		// Task: Set token string kedalam cookie response
 
 		// TODO: answer here
+		expirationTime := time.Now().Add(5 * time.Minute)
+		http.SetCookie(w, &http.Cookie{
+			Name:    cookieName,
+			Value:   string(tokenString),
+			Expires: expirationTime,
+		})
+		
 	})
 
 	return mux
