@@ -46,29 +46,28 @@ func (api *API) login(w http.ResponseWriter, req *http.Request) {
 	//       3. expiry time menggunakan time millisecond
 
 	// TODO: answer here
-	expirationTime := time.Now().Add(5 * time.Millisecond)
-	claims := &Claims{
-		Username: creds.Username,
-		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: expirationTime.Unix(),
-		},
-	}
+	expirationTime := time.Now().Add(5 * time.Minute)
+		claims := &Claims{
+			Username: creds.Username,
+			StandardClaims: jwt.StandardClaims{
+				ExpiresAt: expirationTime.Unix(),
+			},
+		}
 
 	// Task: Buat token menggunakan encoded claim dengan salah satu algoritma yang dipakai
 
 	// TODO: answer here
-	
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	// Task: 1. Buat jwt string dari token yang sudah dibuat menggunakan JWT key yang telah dideklarasikan
 	//       2. return internal error ketika ada kesalahan ketika pembuatan JWT string
 
 	// TODO: answer here
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	tokenString, err := token.SignedString(jwtKey)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		return
-	}
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
 
 	// Task: Set token string kedalam cookie response
 
