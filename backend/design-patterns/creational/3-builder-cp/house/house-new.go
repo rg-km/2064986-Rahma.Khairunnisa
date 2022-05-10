@@ -19,5 +19,5 @@ type HouseBuilder interface {
 }
 
 func NewBuilder(builderType string) HouseBuilder {
-	return nil // TODO: replace this
+	//return nil // TODO: replace this
 }

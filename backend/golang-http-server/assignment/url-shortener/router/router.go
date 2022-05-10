@@ -7,10 +7,10 @@ import (
 
 func SetupRouter(urlHandler handlers.URLHandler) *gin.Engine {
 	router := gin.Default()
-	router.GET("/:path", urlHandler.Get)
 
+	router.GET("/:path", urlHandler.Get)
 	router.POST("/", urlHandler.Create)
+	router.POST("/:path", urlHandler.CreateCustom)
 
 	return router
-	//return &gin.Engine{} // TODO: replace this
 }

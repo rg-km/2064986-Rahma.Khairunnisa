@@ -19,22 +19,44 @@ func NewMapRepository() URLRepository {
 }
 
 func (r *URLRepository) Get(path string) (*entity.URL, error) {
-	if r.Data[path] != "" {
-		return &entity.URL{}, errors.New("url not found")
+	r.mu.Lock()
+	defer r.mu.Unlock()
+	if _, ok := r.Data[path]; !ok {
+		return nil, entity.ErrURLNotFound
 	}
-	return &entity.URL{} , nil // TODO: replace this
+	return &entity.URL{
+		ShortURL: path,
+		LongURL:  r.Data[path],
+	}, nil
+
+	//&entity.URL{} , nil // TODO: replace this
 }
 
 func (r *URLRepository) Create(longURL string) (*entity.URL, error) {
 	r.mu.Lock()
-	rest := entity.GetRandomShortURL(longURL)
 	defer r.mu.Unlock()
-	return &entity.URL{
-		LongURL: rest,
-	}, nil
+
+	url := &entity.URL{
+		LongURL:  longURL,
+		ShortURL: entity.GetRandomShortURL(longURL),
+	}
+	r.Data[url.ShortURL] = url.LongURL
+
+	return url, nil
+
 	//&entity.URL{} , nil // TODO: replace this
 }
 
-//func (r *URLRepository) CreateCustom(longURL, customPath string) (*entity.URL, error) {
+func (r *URLRepository) CreateCustom(longURL, customPath string) (*entity.URL, error) {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	url := &entity.URL{
+		LongURL:  longURL,
+		ShortURL: customPath,
+	}
+	r.Data[url.ShortURL] = url.LongURL
+	return url, nil
+
 	//&entity.URL{} , nil // TODO: replace this
-//}
+}
