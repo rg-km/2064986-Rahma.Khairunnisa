@@ -16,6 +16,12 @@ var err error
 
 var handler http.HandlerFunc = func(w http.ResponseWriter, r *http.Request) {
 	// TODO: answer here
+	if r.Method == http.MethodGet {
+		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	fmt.Fprint(w, "Hello World")
 }
 
 func main() {

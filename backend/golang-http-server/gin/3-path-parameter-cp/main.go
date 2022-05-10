@@ -33,11 +33,15 @@ var data = map[int]User{
 }
 
 func ProfileHandler() func(c *gin.Context) {
-	return func(c *gin.Context) {} // TODO: replace this
+	return func(c *gin.Context) {
+
+	} // TODO: replace this
 }
 
 func GetRouter() *gin.Engine {
-	return &gin.Engine{} // TODO: replace this
+	return &gin.Engine{
+		
+	} // TODO: replace this
 }
 
 func main() {
