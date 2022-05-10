@@ -22,12 +22,26 @@ func NewURLHandler(repo *repository.URLRepository) URLHandler {
 
 func (h *URLHandler) Get(c *gin.Context) {
 	// TODO: answer here
+	if h.repo.Data[c.Param("path")] == "" {
+		c.String(http.StatusNotFound, "Not found")
+	}
 }
 
 func (h *URLHandler) Create(c *gin.Context) {
 	// TODO: answer here
+	url := entity.URL{}
+
+	if url.LongURL == "" {
+		resp, err := h.repo.Create(url.LongURL)
+		if err != nil {
+			c.String(http.StatusBadRequest, "Bad request")
+		}
+		c.JSON(http.StatusOK, resp)
+		
+	}
 }
 
 func (h *URLHandler) CreateCustom(c *gin.Context) {
 	// TODO: answer here
+	
 }

@@ -11,10 +11,13 @@ import (
 
 var TimeHandler = func(writer http.ResponseWriter, request *http.Request) {
 	// TODO: answer here
+	w.Write([]byte("time"))
+
 }
 
 var SayHelloHandler = func(w http.ResponseWriter, r *http.Request) {
 	// TODO: answer here
+	w.Write([]byte("hello"))
 }
 
 func main() {
