@@ -41,7 +41,7 @@ var _ = Describe("URL Shortener", func() {
 			var res struct {
 				Data entity.URL
 			}
-			json.Unmarshal(w.Body.Bytes(), &res)
+			json.Unmarshal(w.Body.Bytes(), &res.Data)
 			Expect(w.Code).To(Equal(http.StatusOK))
 			Expect(res.Data.LongURL).To(Equal("https://pawgrammers.com"))
 		})
@@ -61,7 +61,7 @@ var _ = Describe("URL Shortener", func() {
 			var res struct {
 				Data entity.URL
 			}
-			json.Unmarshal(w.Body.Bytes(), &res)
+			json.Unmarshal(w.Body.Bytes(), &res.Data)
 			Expect(w.Code).To(Equal(http.StatusOK))
 			Expect(res.Data.LongURL).To(Equal("https://pawgrammers.com"))
 			Expect(res.Data.ShortURL).To(Equal("pawgrammers"))
