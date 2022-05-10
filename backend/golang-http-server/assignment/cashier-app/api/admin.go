@@ -33,6 +33,7 @@ func (api *API) getDashboard(w http.ResponseWriter, req *http.Request) {
 	endPeriod, err = time.Parse("2006-01-02", req.URL.Query().Get("end_period"))
 
 	// TODO: answer here
+	
 
 	encoder := json.NewEncoder(w)
 

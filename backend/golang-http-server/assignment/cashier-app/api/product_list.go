@@ -38,5 +38,5 @@ func (api *API) productList(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	encoder.Encode(ProductListSuccessResponse{Products: []Product{}}) // TODO: replace this
+	//encoder.Encode(ProductListSuccessResponse{Products: []Product{}}) // TODO: replace this
 }

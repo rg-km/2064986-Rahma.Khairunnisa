@@ -25,6 +25,7 @@ func IsNameExists(name string) bool {
 func GetNameHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// TODO: answer here
+		
 	}
 }
 

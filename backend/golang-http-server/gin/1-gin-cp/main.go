@@ -12,13 +12,20 @@ import (
 
 func GetGinRoute() *gin.Engine {
 	//return &gin.Engine{} // TODO: replace this
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"id": 1,
-			"content": "Hello World",
-		})
+	r := gin.Default()
+	r.GET("/hello", func(c *gin.Context) {
+		x := gin.H{
+			"message": "hello",
+		}
+		c.JSON(http.StatusOK, x)
 	})
-	r.Run(":3000")
+	r.GET("/world", func(c *gin.Context) {
+		x := gin.H{
+			"message": "world", 
+		}
+		c.JSON(http.StatusOK, x)
+	})
+	return r
 }
 
 func main() {

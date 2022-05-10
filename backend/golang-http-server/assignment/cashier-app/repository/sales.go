@@ -52,6 +52,7 @@ func (u *SalesRepository) LoadOrCreate() ([]Sales, error) {
 		}
 
 		// TODO: answer here
+
 	}
 
 	return result, nil
@@ -63,6 +64,7 @@ func (u *SalesRepository) Save(sales []Sales) error {
 	}
 	for i := 0; i < len(sales); i++ {
 		// TODO: answer here
+		
 	}
 	return u.db.Save("sales", records)
 }
@@ -95,14 +97,14 @@ func (u *SalesRepository) Get(request GetSalesRequest) ([]Sales, error) {
 	}
 
 	if request.StartPeriod != nil && request.EndPeriod != nil && request.ProductName == "" {
-		return []Sales{}, nil // TODO: replace this
+		//return []Sales{}, nil // TODO: replace this
 	}
 
 	if request.StartPeriod == nil && request.EndPeriod == nil && request.ProductName != "" {
-		return []Sales{}, nil // TODO: replace this
+		//return []Sales{}, nil // TODO: replace this
 	}
 
-	return []Sales{}, nil // TODO: replace this
+	//return []Sales{}, nil // TODO: replace this
 }
 
 func GetProductNameSales(sales []Sales, productName string) []Sales {
