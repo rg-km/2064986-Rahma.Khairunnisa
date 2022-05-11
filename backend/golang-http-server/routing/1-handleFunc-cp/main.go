@@ -11,13 +11,19 @@ import (
 
 var TimeHandler = func(writer http.ResponseWriter, request *http.Request) {
 	// TODO: answer here
-	w.Write([]byte("time"))
+	t := time.Now()
+	fmt.Fprintf(writer, "%v, %v %v %v", t.Weekday(), t.Day(), t.Month(), t.Year())
 
 }
 
 var SayHelloHandler = func(w http.ResponseWriter, r *http.Request) {
 	// TODO: answer here
-	w.Write([]byte("hello"))
+	name := r.URL.Query().Get("name")
+	if name == "" {
+		w.Write([]byte("Hello there"))
+		return
+	}
+	w.Write([]byte(fmt.Sprintf("Hello, %s!", name)))
 }
 
 func main() {

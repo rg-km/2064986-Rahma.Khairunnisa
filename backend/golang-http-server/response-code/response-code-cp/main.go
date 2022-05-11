@@ -25,6 +25,18 @@ func IsNameExists(name string) bool {
 func GetNameHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// TODO: answer here
+		if r.Method != "GET" {
+			w.WriteHeader(http.StatusMethodNotAllowed)
+			return
+		} 
+		name := r.URL.Query().Get("name")
+		if IsNameExists(name) {
+			w.Write([]byte("Name is Found"))
+			return
+		} else {
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
 		
 	}
 }
@@ -32,5 +44,6 @@ func GetNameHandler() http.HandlerFunc {
 func GetMux() *http.ServeMux {
 	mux := http.NewServeMux()
 	// TODO: answer here
+	mux.HandleFunc("/name", GetNameHandler())
 	return mux
 }
