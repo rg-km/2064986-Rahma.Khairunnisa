@@ -13,7 +13,7 @@ import (
 func TimeHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		t := time.Now()
-		fmt.Fprintf("%v, %v %v %v", t.Weekday(), t.Day(), t.Month(), t.Year())
+		w.Write([]byte(fmt.Sprintf("%v, %v %v %v", t.Weekday(), t.Day(), t.Month(), t.Year() )))
 	} // TODO: replace this
 }
 
