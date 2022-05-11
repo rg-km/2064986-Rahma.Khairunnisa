@@ -34,6 +34,15 @@ var data = map[int]User{
 
 func ProfileHandler() func(c *gin.Context) {
 	return func(c *gin.Context) {
+		param := c.Param("id")
+		id, _ := strconv.Atoi(param)
+
+		if _, ok := data[id]; !ok {
+			c.String(http.StatusNotFound, "data not found")
+			return
+		}
+		output := fmt.Sprintf("Name: %s, Country: %s, Age: %d", data[id].Name, data[id].Country, data[id].Age)
+		c.String(http.StatusOK, output)
 
 	} // TODO: replace this
 }

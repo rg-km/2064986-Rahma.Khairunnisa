@@ -57,45 +57,45 @@ func (api *API) login(w http.ResponseWriter, req *http.Request) {
 	// Task: 1. Deklarasi expiry time untuk token jwt
 	//       2. Buat claim menggunakan variable yang sudah didefinisikan diatas
 	//       3. expiry time menggunakan time millisecond
+	expirationTime := time.Now().Add(60 * time.Minute)
 
-	// TODO: answer here
-	expirationTime := time.Now().Add(5 * time.Minute)
-
-	// Task: Buat token menggunakan encoded claim dengan salah satu algoritma yang dipakai
-
-	// TODO: answer here
 	claims := &Claims{
-		Username: *res,
+		Username: user.Username,
+		Role:     *userRole,
 		StandardClaims: jwt.StandardClaims{
-			// expiry time menggunakan time millisecond
 			ExpiresAt: expirationTime.Unix(),
 		},
 	}
 
-	// Task: 1. Buat jwt string dari token yang sudah dibuat menggunakan JWT key yang telah dideklarasikan
-	//       2. return internal error ketika ada kesalahan ketika pembuatan JWT string
-
 	// TODO: answer here
+
+	// Task: Buat token menggunakan encoded claim dengan salah satu algoritma yang dipakai
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
-	// Task: Set token string kedalam cookie response
+	// TODO: answer here
+
+	// Task: 1. Buat jwt string dari token yang sudah dibuat menggunakan JWT key yang telah dideklarasikan
+	//       2. return internal error ketika ada kesalahan ketika pembuatan JWT string
+	tokenString, err := token.SignedString(jwtKey)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
 
 	// TODO: answer here
-	tokenString, err := token.SignedString(jwtKey)
-		if err != nil {
-			// return internal error ketika ada kesalahan ketika pembuatan JWT string
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
+
+	// Task: Set token string kedalam cookie response
 	http.SetCookie(w, &http.Cookie{
 		Name:    "token",
 		Value:   tokenString,
 		Expires: expirationTime,
-		})
+	})
+
+	// TODO: answer here
 
 	// Task: Return response berupa username dan token JWT yang sudah login
 
-	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: "", Token: ""}) // TODO: replace this
+	encoder.Encode(LoginSuccessResponse{Username: *res, Token: tokenString}) // TODO: replace this
 }
 
 func (api *API) logout(w http.ResponseWriter, req *http.Request) {
@@ -123,5 +123,8 @@ func (api *API) logout(w http.ResponseWriter, req *http.Request) {
 	}
 	http.SetCookie(w, &c)
 
-	encoder.Encode(AuthErrorResponse{Error: ""}) // TODO: replace this
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("logout success"))
+
+	//encoder.Encode(AuthErrorResponse{Error: ""}) // TODO: replace this
 }

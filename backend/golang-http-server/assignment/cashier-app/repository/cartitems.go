@@ -65,61 +65,59 @@ func (u *CartItemRepository) Save(cartItems []CartItem) error {
 }
 
 func (u *CartItemRepository) SelectAll() ([]CartItem, error) {
-	//return []CartItem{}, nil // TODO: replace this
-	return u.LoadOrCreate()
+	// return []CartItem{}, nil // TODO: replace this
+	cartItems, err := u.LoadOrCreate()
+	if err != nil {
+		return nil, err
+	}
+	return cartItems, nil
 }
 
 func (u *CartItemRepository) Add(product Product) error {
-	carts, err := u.LoadOrCreate()
+	cartItems, err := u.LoadOrCreate()
 	if err != nil {
 		return err
 	}
 
-	//return nil // TODO: replace this
-	for i := 0; i < len(carts); i++ {
-		if carts[i].ProductName == product.ProductName {
-			carts[i].Quantity++
-			return u.Save(carts)
+	//untuk update
+	for i := 0; i < len(cartItems); i++ {
+		if cartItems[i].ProductName == product.ProductName {
+			cartItems[i].Quantity++
+			return u.Save(cartItems)
 		}
 	}
 
-	carts = append(carts, CartItem{
+	//for insert
+	cartItems = append(cartItems, CartItem{
 		Category:    product.Category,
 		ProductName: product.ProductName,
 		Price:       product.Price,
 		Quantity:    1,
 	})
+	return u.Save(cartItems)
 
-	return u.Save(carts)
+	// return nil // TODO: replace this
 }
 
 func (u *CartItemRepository) ResetCartItems() error {
-	//return nil // TODO: replace this
+	// return nil // TODO: replace this
 	u.db.Delete("cart_items")
-
-	var resetData = [][]string{
+	records := [][]string{
 		{"category", "product_name", "price", "quantity"},
 	}
-	err := u.db.Save("cart_items", resetData)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return u.db.Save("cart_items", records)
 }
 
 func (u *CartItemRepository) TotalPrice() (int, error) {
-	//return 0, nil // TODO: replace this
-	carts, err := u.LoadOrCreate()
+	// return 0, nil // TODO: replace this
+	cartItems, err := u.LoadOrCreate()
 	if err != nil {
 		return 0, err
 	}
 
 	totalPrice := 0
-
-	for i := 0; i < len(carts); i++ {
-		totalPrice += carts[i].Price * carts[i].Quantity
+	for i := 0; i < len(cartItems); i++ {
+		totalPrice += cartItems[i].Price * cartItems[i].Quantity
 	}
-
 	return totalPrice, nil
 }

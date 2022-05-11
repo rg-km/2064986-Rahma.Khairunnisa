@@ -26,7 +26,17 @@ func (api *API) productList(w http.ResponseWriter, req *http.Request) {
 	response := ProductListSuccessResponse{}
 	response.Products = make([]Product, 0)
 
+	var arrProducts []Product
 	products, err := api.productsRepo.SelectAll()
+	for i := 0; i < len(products); i++ {
+		newDataProduct := Product{
+			Name:     products[i].ProductName,
+			Price:    products[i].Price,
+			Category: products[i].Category,
+		}
+		arrProducts = append(arrProducts, newDataProduct)
+	}
+
 	defer func() {
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
@@ -38,5 +48,13 @@ func (api *API) productList(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	//encoder.Encode(ProductListSuccessResponse{Products: []Product{}}) // TODO: replace this
+	for _, product := range products {
+		response.Products = append(response.Products, Product{
+			Name:     product.ProductName,
+			Price:    product.Price,
+			Category: product.Category,
+		})
+	}
+	encoder.Encode(response)
+	// encoder.Encode(ProductListSuccessResponse{Products: []Product{}}) // TODO: replace this
 }
