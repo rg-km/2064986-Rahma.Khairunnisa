@@ -15,6 +15,7 @@ type House struct {
 
 type HouseBuilder interface {
 	// TODO: answer here
+	
 	getHouse() House
 }
 
