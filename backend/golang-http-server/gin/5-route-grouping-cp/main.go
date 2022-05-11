@@ -29,7 +29,7 @@ var movies = map[int]Movie{
 var MovieListHandler = func(c *gin.Context) {
 	var movieList []Movie
 	for _, movie := range movies {
-		movieList := append(movieList, movie)
+		movieList = append(movieList, movie)
 	}
 	c.JSON(http.StatusOK, gin.H{"data": movieList}) // TODO: replace this
 }
