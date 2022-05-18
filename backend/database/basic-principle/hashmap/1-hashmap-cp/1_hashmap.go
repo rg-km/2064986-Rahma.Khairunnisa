@@ -29,5 +29,12 @@ func (h *HashMap) Put(key int, value string) error {
 }
 
 func (h *HashMap) GetRange(from, to int) ([]string, error) {
-	return nil, nil // TODO: replace this
+	//return nil, nil // TODO: replace this
+	var res []string
+	for key := range h.m {
+		if key < from {
+			res = append(res, h.m[key])
+		}
+	}
+	return res, nil
 }
