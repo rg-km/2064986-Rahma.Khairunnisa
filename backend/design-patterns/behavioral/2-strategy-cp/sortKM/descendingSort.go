@@ -10,6 +10,6 @@ func (ds *DescendingSort) Sort(array []int) {
 	//choose any sort algo you want
 	// TODO: answer here
 	sort.Slice(array, func(i, j int) bool {
-		return array[i] < array [j]
+		return array[i] > array [j]
 	})
 }
