@@ -33,9 +33,9 @@ func (db *InvoiceDB) Insert(code string, name string, address string, phone stri
 }
 
 func (db *InvoiceDB) Where(id PrimaryKey) *InvoiceRow {
-	return InvoiceRow{} // TODO: replace this
+	//return InvoiceRow{} // TODO: replace this
 }
 
 func (db *InvoiceDB) Update(id PrimaryKey, code string, name string, address string, phone string) (*InvoiceRow, error) {
-	return nil, nil // TODO: replace this
+	//return nil, nil // TODO: replace this
 }
