@@ -67,8 +67,16 @@ func (db *StudentTable) WhereStudent(id int) *StudentRow {
 			return &(*db)[i]
 		}
 	}
+	return nil
 }
 
 func (db *SchoolTable) GetSchool(schoolID int) SchoolRow {
 	// TODO: answer here
+	var result SchoolRow
+	for _, row := range *db {
+		if row.ID == SchoolID {
+			result = row
+		}
+	}
+	return result
 }
