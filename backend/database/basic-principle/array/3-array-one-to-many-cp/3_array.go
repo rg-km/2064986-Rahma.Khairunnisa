@@ -67,6 +67,7 @@ func (db *PhoneTable) WherePhone(id int) *PhoneRow {
 			return &(*db)[i]
 		}
 	}
+	return nil
 }
 
 func (db *UserTable) GetUser(userID int) UserRow {
