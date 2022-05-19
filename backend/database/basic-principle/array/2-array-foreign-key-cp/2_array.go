@@ -74,7 +74,7 @@ func (db *SchoolTable) GetSchool(schoolID int) SchoolRow {
 	// TODO: answer here
 	var result SchoolRow
 	for _, row := range *db {
-		if row.ID == SchoolID {
+		if row.ID == schoolID {
 			result = row
 		}
 	}
