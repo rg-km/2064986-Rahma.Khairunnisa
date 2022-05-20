@@ -37,7 +37,9 @@ func (db *EmployeeDB) Insert(name string, position string, salary int, managerID
 func (db *EmployeeDB) Update(id int, name string, position string, salary int, managerID int) {
 	// TODO: answer here
 	for idx, row := range *db {
+		
 		if row.ID == id {
+			
 			emp := (*db)[idx]
 			emp.Name = name
 			emp.Position = position
@@ -46,7 +48,6 @@ func (db *EmployeeDB) Update(id int, name string, position string, salary int, m
 			return
 		}
 	}
-
 }
 
 func (db *EmployeeDB) Delete(id int) {
