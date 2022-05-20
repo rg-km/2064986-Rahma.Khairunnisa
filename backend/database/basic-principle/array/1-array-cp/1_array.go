@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type EmployeeRow struct {
 	ID        int
 	Name      string
