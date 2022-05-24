@@ -24,7 +24,7 @@ func (r *EmployeeRepository) FetchEmployeeByNIK(nik string) (*model.Employee, er
 	// data diambil dengan nik tertentu dari parameter nik
 
 	// TODO: answer here
-	sqlStmt := `
+	sqlStmt = `
 	SELECT 
 	    id, nik, firstname, lastname, email
     FROM 
@@ -56,7 +56,7 @@ func (r *EmployeeRepository) FetchEmployees() ([]model.Employee, error) {
 	// lihat model.Employee untuk field yang diambil dari database
 
 	// TODO: answer here
-	sqlStmt := `
+	sqlStmt = `
 	SELECT 
 	    id, nik, firstname, lastname, email
 	FROM 
