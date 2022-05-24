@@ -31,8 +31,7 @@ func (r *MovieRepository) FetchMovies() ([]model.Movie, error) {
 		d.name as director_name
 	FROM movies m
 	INNER JOIN genres g ON m.genre_id = g.id
-	INNER JOIN directors d ON m.director_id = d.id
-	ORDER BY o.id`
+	INNER JOIN directors d ON m.director_id = d.id`
 
 	rows, err := r.db.Query(sqlStmt)
 	if err != nil {
