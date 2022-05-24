@@ -27,9 +27,24 @@ func (p *PlaylistRepository) FetchUserPlaylists(userID int64) ([]model.UserPlayl
 
 	// Task 1: Buat query untuk mengambil playlist yang dimiliki user
 	// TODO: answer here
+	sqlStatement = `
+	SELECT 
+	    id, name, created_at
+    FROM 
+        playlist`
+
+	
+		rows, err := r.db.Query(sqlStatement)
+		if err != nil {
+			return nil, err
+		}
+		defer rows.Close()
+
+	
 
 	// Task 2: Buat execute statement untuk mengambil playlist yang dimiliki user
 	// TODO: answer here
+
 
 	// Task 3: Buat looping untuk mengambil data playlist yang dimiliki user
 	var playlist model.UserPlaylist
