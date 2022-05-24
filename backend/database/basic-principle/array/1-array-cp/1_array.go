@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 type EmployeeRow struct {
 	ID        int
 	Name      string
@@ -36,15 +34,12 @@ func (db *EmployeeDB) Insert(name string, position string, salary int, managerID
 
 func (db *EmployeeDB) Update(id int, name string, position string, salary int, managerID int) {
 	// TODO: answer here
-	for idx, row := range *db {
-		
+	for i, row := range *db {
 		if row.ID == id {
-			
-			emp := (*db)[idx]
-			emp.Name = name
-			emp.Position = position
-			emp.Salary = salary
-			emp.ManagerID = managerID
+			(*db)[i].Name = name
+			(*db)[i].Position = position
+			(*db)[i].Salary = salary
+			(*db)[i].ManagerID = managerID
 			return
 		}
 	}
@@ -52,9 +47,9 @@ func (db *EmployeeDB) Update(id int, name string, position string, salary int, m
 
 func (db *EmployeeDB) Delete(id int) {
 	// TODO: answer here
-	for idx, row := range *db {
+	for i, row := range *db {
 		if row.ID == id {
-			(*db) = append((*db)[:idx], (*db)[idx+1:]...)
+			(*db) = append((*db)[:i], (*db)[i+1:]...)
 			return
 		}
 	}
