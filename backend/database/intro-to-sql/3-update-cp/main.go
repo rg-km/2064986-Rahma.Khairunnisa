@@ -15,16 +15,15 @@ func NewEmployeeRepository(db *sql.DB) *EmployeeRepository {
 }
 
 func (r *EmployeeRepository) UpdateEmployee(updateEmployee *model.Employee) error {
-	var stmt string
 
 	// Task : Create SQL statement
 	// 1. Update the employee with the given id
 	// 2. Set the updated fields (first_name, last_name, email)
 	// TODO: answer here
-	stmt = `
-		UPDATE employee
+	stmt := `
+		UPDATE employees
 		SET first_name = ?, last_name = ?, email = ?
-		WHERE id = ?
+		WHERE nik = ?
 	`
 
 	_, err := r.db.Exec(stmt, updateEmployee.FirstName, updateEmployee.LastName, updateEmployee.Email, updateEmployee.NIK)
@@ -36,15 +35,15 @@ func (r *EmployeeRepository) UpdateEmployee(updateEmployee *model.Employee) erro
 }
 
 func (r *EmployeeRepository) UpdateEmployeeEmail(nik string, email string) error {
-	var stmt string
+
 
 	// Task : Create SQL statement
 	// 1. Update the employee with the given nik
 	// 2. Set the updated fields (email)
 	
 	// TODO: answer here
-	stmt = `
-		UPDATE employee
+	stmt := `
+		UPDATE employees
 		SET email = ?
 		WHERE nik = ?
 	`
