@@ -1,7 +1,7 @@
 package main
 
 // pada tahap normalisai 1 (1NF), kita akan menyederhanakan bentuk unormal sesuai dengan kaidah bentuk normalisasi 1
-// dengan menghilangkan duplikasi kolom dari tabel yang sama
+// dengan memisahkan data rekap dengan nomor bon yang sama dari 1 row ke beberapa row
 
 import (
 	"database/sql"
@@ -27,21 +27,49 @@ type Rekap struct {
 }
 
 // Migrate digunakan untuk melakukan migrasi database dengan data yang dibutuhkan
-// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi Migrate:
+// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi Migrate
+// Buatlah tabel dengan nama rekap dan insert data seperti pada contoh di bagian bawah file ini
 func Migrate() (*sql.DB, error) {
 	db, err := sql.Open("sqlite3", "./normalize-cp.db")
 	if err != nil {
 		panic(err)
 	}
 
-	sqlStmt := `CREATE TABLE ... ;` // TODO: replace this
+	// sqlStmt := `CREATE TABLE rekap ... ;` // TODO: replace this
+	sqlStmt := `CREATE TABLE IF NOT EXISTS rekap (
+		no_bon VARCHAR(12),
+		nama_barang VARCHAR(12),
+		harga INT ,
+		jumlah INT,
+		biaya INT,
+		sub_total INT,
+		discount INT,
+		total INT,
+		bayar INT,
+		kembalian INT,
+		kasir VARCHAR(10),
+		tanggal VARCHAR(10),
+		waktu VARCHAR(10));`
+
 
 	_, err = db.Exec(sqlStmt)
 	if err != nil {
 		return nil, err
 	}
 
-	_, err = db.Exec(`INSERT INTO ... VALUES ... ;`) // TODO: replace this
+	// _, err = db.Exec(`INSERT INTO ... VALUES ... ;`) // TODO: replace this
+	_, err = db.Exec(`
+			INSERT INTO
+			rekap (no_bon, nama_barang, harga, jumlah, biaya, sub_total, discount, total, bayar, kembalian, kasir, tanggal, waktu)
+			VALUES
+			("00001", "Disket", 4500, 3, 13500, 13500, 0, 13500, 100000, 23000, "Rosi", "04-05-2022", "12:00:00"),
+			("00001", "Refil Tinta", 22500, 1, 22500, 36000, 0, 36000, 100000, 23000, "Rosi", "04-05-2022", "12:00:00"),
+			("00001", "CD Blank", 1500, 4, 6000, 42000, 0, 42000, 100000, 23000, "Rosi", "04-05-2022", "12:00:00"),
+			("00001", "CD Mouse", 17500, 2, 35000, 77000, 0, 77000, 100000, 23000, "Rosi", "04-05-2022", "12:00:00"),
+			("00002", "Disket", 4500, 1, 4500, 4500, 0, 4500, 17500, 0, "Dewi", "04-05-2022", "12:00:00"),
+			("00002", "Mouse", 17400, 1, 17500, 22000, 0, 22000, 117500, 0, "Dewi", "04-05-2022", "12:00:00"),
+			("00002", "Flash Disk", 100000, 1, 100000, 117500, 0, 117500, 117500, 0, "Dewi", "04-05-2022", "12:00:00")
+		`)
 
 	if err != nil {
 		panic(err)
@@ -50,23 +78,25 @@ func Migrate() (*sql.DB, error) {
 	return db, nil
 }
 
-// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi checkLatestId:
-func checkLatestId(id string) (int, error) {
+// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi countByNoBon:
+// countByNoBon digunakan untuk menghitung jumlah data yang ada berdasarkan no_bon
+func countByNoBon(noBon string) (int, error) {
 	db, err := sql.Open("sqlite3", "./normalize-cp.db")
 	if err != nil {
 		panic(err)
 	}
 
-	sqlStmt := `SELECT ... FROM ... WHERE ... = ?;` // TODO: replace this
+	// sqlStmt := `SELECT ... FROM rekap WHERE ... = ?;` // TODO: replace this
+	sqlStmt := `SELECT COUNT(1) FROM rekap WHERE no_bon = ?;`
 
-	row := db.QueryRow(sqlStmt, id)
-	var latestId int
-	err = row.Scan(&latestId)
+	
+	row := db.QueryRow(sqlStmt, noBon)
+	var countBon int
+	err = row.Scan(&countBon)
 	if err != nil {
 		return 0, err
-	} else {
-		return 1, nil
 	}
+	return countBon, nil
 }
 
 // insert value hint
